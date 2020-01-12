@@ -1,0 +1,55 @@
+Drop table if EXISTS Credential; 
+Drop table if EXISTS Classroom; 
+Drop table if EXISTS Teacher; 
+Drop table if EXISTS Hour;
+Drop table if EXISTS Subject; 
+Drop table if EXISTS Lesson;
+
+Create table Lesson (
+	id_t Integer NOT NULL,
+	id_s Integer NOT NULL,
+	id_cr Integer NOT NULL,
+	id_h Integer NOT NULL,
+Primary Key  (id_t,id_s)
+);
+
+Create table Subject (
+	id_s Integer NOT NULL,
+	fullname Varchar(100) NOT NULL,
+	name Varchar(3) NOT NULL,
+Primary Key  (id_s)
+);
+
+Create table Hour (
+	id_h Integer NOT NULL,
+	start Datetime NOT NULL,
+	end Datetime NOT NULL,
+Primary Key  (id_h)
+);
+
+Create table Teacher (
+	id_t Integer NOT NULL,
+	name Varchar(50) NOT NULL,
+	surname Varchar(50) NOT NULL,
+Primary Key  (id_t)
+);
+
+Create table Classroom (
+	id_cr Integer NOT NULL,
+	room_number Varchar(10) NOT NULL,
+Primary Key  (id_cr)
+);
+
+Create table Credential (
+	id_c Integer NOT NULL,
+	username Varchar(20) NOT NULL UNIQUE,
+	password Varchar(64) NOT NULL,
+	id_h Integer NOT NULL,
+Primary Key  (id_c)
+);
+
+Alter table Lesson add  foreign key(id_s) references Subject (id_s) ;
+Alter table Lesson add  foreign key(id_h) references Hour (id_h) ;
+Alter table Credential add  foreign key(id_h) references Hour (id_h) ;
+Alter table Lesson add  foreign key(id_t) references Teacher (id_t) ;
+Alter table Lesson add  foreign key(id_cr) references Classroom (id_cr) ;
