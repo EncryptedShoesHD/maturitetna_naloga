@@ -60,13 +60,13 @@ class Database {
     This array variable is used to specify table joins. You have to use key => value type of arrays!
 
     array(
-      "inner" => array("Table1.Column1 = Table2.Column2", "Table3.Column3 = Table4.Column4"),
+      "inner" => array("TableToJoin" => "Table1.Column1 = Table2.Column2", "OtherTableToJoin" => "Table3.Column3 = Table4.Column4"),
       "right" => array(), // Optional, if you don't want or need other joins than inner ones.
     )
 
     Key must always match the type of join you would like to create. It is not required to use all types of joins.
   */
-  function select($dataToSelect, $tableName, $joins) {
+  function select($dataToSelect, $tableName, $joins, $where) {
     if(!$this->conn->ping()) {
       connect();
     }
@@ -82,12 +82,21 @@ class Database {
 
     if($joins != null) {
       foreach($joins as $i => $value) {
-        switch(strtolower($i)) {
+        $i = strtolower($i);
+        switch($i) {
           case "inner":
-            $query = $query . " INNER JOIN "
+          case "left":
+          case "right":
+          case "full":
+            $joinArray = $joins[$i];
+            foreach($joinArray as $j => $value) {
+              $query = $query . strtoupper($i) . " JOIN $j ON $joinArray[$j] ";
+            }
         }
       }
     }
+
+    $query = $query . "WHERE " . $where;
 
     echo $query;
   }

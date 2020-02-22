@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  padding: 10px 5px;
+}
+
+#navbar {
+  height: 50px;
+  width: 100%;
+  background-color: #e2e2e2;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 24px;
+}
+
+#brand_name {
+  color: #4744FF;
+  margin-left: 7px;
+  font-size: 25px;
+  font-family: "Lato";
+}
+
+#nav_links {
+  float: right;
+}
+
+.nav_link {
+  font-size: 20px;
+  font-family: "Lato";
+  position: relative;
+}
+
+#nav_links .nav_link:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #4744ff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+#nav_links .nav_link:hover:after {
+  width: 100%;
+  left: 0;
+}
