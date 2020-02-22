@@ -16,7 +16,7 @@ a {
   padding: 10px 15px;
   box-sizing: border-box;
   font-size: 24px;
-  box-shadow: 0px 7px 10px -3px rgba(0,0,0,0.4);
+  box-shadow: 0px 7px 10px -3px rgba(0,0,0,0.35);
 }
 
 #brand_name {
@@ -55,7 +55,7 @@ a {
 #footer {
   width: 100%;
   background-color: #e3e3e3;
-  box-shadow: 0px -7px 10px -3px rgba(0,0,0,0.4);
+  box-shadow: 0px -7px 10px -3px rgba(0,0,0,0.35);
 }
 
 .clearfix {
@@ -111,7 +111,7 @@ a {
   text-align: left;
 }
 
-#send_a_message>a>button {
+button {
   background-color: #131335;
   color: white;
   border: none;
@@ -119,7 +119,7 @@ a {
   padding: 15px 10%;
 }
 
-#send_a_message>a>button:hover {
+button:hover {
   background-color: #363696;
 }
 
@@ -131,7 +131,12 @@ h4 {
 
 #page_body {
   width: 92%;
-  height: 750px;
-  margin-left: 4%;
-  background-color: transparent;
+  margin: 6px 4%;
+  text-align: center;
+}
+
+#body_title {
+  font-size: 50px;
+  text-align: center;
+  color: #4744ff;
 }
