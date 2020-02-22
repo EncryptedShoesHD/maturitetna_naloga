@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-family: 'Lato';
 }
 
 a {
@@ -15,13 +16,13 @@ a {
   padding: 10px 15px;
   box-sizing: border-box;
   font-size: 24px;
+  box-shadow: 0px 7px 10px -3px rgba(0,0,0,0.4);
 }
 
 #brand_name {
   color: #4744FF;
   margin-left: 7px;
   font-size: 25px;
-  font-family: "Lato";
 }
 
 #nav_links {
@@ -30,7 +31,6 @@ a {
 
 .nav_link {
   font-size: 20px;
-  font-family: "Lato";
   position: relative;
 }
 
@@ -50,4 +50,88 @@ a {
 #nav_links .nav_link:hover:after {
   width: 100%;
   left: 0;
+}
+
+#footer {
+  width: 100%;
+  background-color: #e3e3e3;
+  box-shadow: 0px -7px 10px -3px rgba(0,0,0,0.4);
+}
+
+.clearfix {
+  display: flex;
+  text-align: center;
+  height: 135px;
+  margin: 0;
+  line-height: 50px;
+}
+
+#copyright_note {
+  text-align: center;
+  padding: 1px;
+  border-top: solid 1px #b3b3b3;
+}
+
+#social_media_section, #send_a_message {
+  width: 35%;
+}
+
+#contact_us {
+  width: 30%;
+}
+
+#send_a_message, #contact_us {
+  border-left: solid  1px #b3b3b3;
+}
+
+#social_media_links {
+  height: 30px;
+  width: 100%;
+  display: flex;
+}
+
+.social_media_link {
+  width: calc(100%/3);
+}
+
+.social_media_link>p, #contact_info_section>p {
+  margin: 0;
+  line-height: 23px;
+  margin-bottom: 2px;
+}
+
+.social_media_link:hover, #contact_info_section>p>a:hover {
+  color: #4744FF;
+  font-weight: bold;
+}
+
+#contact_info_section {
+  width: 90%;
+  margin-left: 5%;
+  text-align: left;
+}
+
+#send_a_message>a>button {
+  background-color: #131335;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 10%;
+}
+
+#send_a_message>a>button:hover {
+  background-color: #363696;
+}
+
+h4 {
+  margin: 0;
+  text-transform: uppercase;
+  color: #4d4d4d;
+}
+
+#page_body {
+  width: 92%;
+  height: 750px;
+  margin-left: 4%;
+  background-color: transparent;
 }
