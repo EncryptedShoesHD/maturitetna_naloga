@@ -1,56 +1,429 @@
-Drop table if EXISTS Credential;
-Drop table if EXISTS Lesson;
-Drop table if EXISTS Hour;
-Drop table if EXISTS Classroom; 
-Drop table if EXISTS Teacher;
-Drop table if EXISTS Subject; 
+Drop table if exists Hour; 
 
-Create table Lesson (
+Drop table if exists Classroom;
+
+Drop table if exists Teacher;
+
+Drop table if exists Hour;
+
+Drop table if exists Subject; 
+
+Drop table if exists Lesson;
+
+Create table Lesson(
 	id_t Integer NOT NULL,
 	id_s Integer NOT NULL,
 	id_cr Integer NOT NULL,
 	id_h Integer NOT NULL,
 Primary Key  (id_t,id_s)
-);
+) 
 
-Create table Subject (
-	id_s Integer NOT NULL AUTO_INCREMENT,
-	fullname Varchar(100) NOT NULL,
-	name Varchar(3) NOT NULL,
+
+Create table Subject(
+	id_s Integer NOT NULL,
+	name Varchar(50) NOT NULL,
+	sh_name Varchar(50) NOT NULL,
 Primary Key  (id_s)
-);
+) 
 
-Create table Hour (
-	id_h Integer NOT NULL AUTO_INCREMENT,
-	start Time NOT NULL,
-	end Time NOT NULL,
+
+Create table Hour(
+	id_h Integer NOT NULL,
+	start Datetime NOT NULL,
+	end Datetime NOT NULL,
 Primary Key  (id_h)
-);
+) 
 
-Create table Teacher (
-	id_t Integer NOT NULL AUTO_INCREMENT,
+
+Create table Teacher(
+	id_t Integer NOT NULL,
 	name Varchar(50) NOT NULL,
 	surname Varchar(50) NOT NULL,
+	email VARCHAR(320) NOT NULL,
+	gender Char(1) NOT NULL,
 Primary Key  (id_t)
-);
+) 
 
-Create table Classroom (
-	id_cr Integer NOT NULL AUTO_INCREMENT,
-	room_number Varchar(10) NOT NULL,
+
+
+Create table Classroom(
+	id_cr Integer NOT NULL,
+	room_number Varchar(20) NOT NULL,
 Primary Key  (id_cr)
-);
+) 
 
-Create table Credential (
-	id_c Integer NOT NULL AUTO_INCREMENT,
+
+Create table Credential(
+	id_c Integer NOT NULL,
 	username Varchar(20) NOT NULL UNIQUE,
 	password Varchar(64) NOT NULL,
 	id_h Integer NOT NULL,
 Primary Key  (id_c)
-);
+) 
 
-Alter table Lesson add  foreign key(id_s) references Subject (id_s) ;
-Alter table Lesson add  foreign key(id_h) references Hour (id_h) ;
-Alter table Credential add  foreign key(id_h) references Hour (id_h) ;
-Alter table Lesson add  foreign key(id_t) references Teacher (id_t) ;
-Alter table Lesson add  foreign key(id_cr) references Classroom (id_cr) ;
+Alter table Lesson add  foreign key(id_s) references Subject (id_s) 
+
+Alter table Lesson add  foreign key(id_h) references Hour (id_h) 
+
+Alter table Credential add  foreign key(id_h) references Hour (id_h) 
+
+Alter table Lesson add  foreign key(id_t) references Teacher (id_t) 
+
+Alter table Lesson add  foreign key(id_cr) references Classroom (id_cr) 
+
+insert into Hour (start, end) values ('19:48', '9:39');
+insert into Hour (start, end) values ('22:54', '1:48');
+insert into Hour (start, end) values ('16:41', '5:54');
+insert into Hour (start, end) values ('1:29', '0:11');
+insert into Hour (start, end) values ('21:53', '8:24');
+insert into Hour (start, end) values ('17:32', '18:53');
+insert into Hour (start, end) values ('17:17', '10:57');
+insert into Hour (start, end) values ('0:08', '16:27');
+insert into Hour (start, end) values ('14:00', '2:22');
+insert into Hour (start, end) values ('7:09', '4:03');
+insert into Hour (start, end) values ('9:02', '16:37');
+insert into Hour (start, end) values ('10:29', '18:43');
+insert into Hour (start, end) values ('18:00', '20:07');
+insert into Hour (start, end) values ('20:59', '1:39');
+insert into Hour (start, end) values ('1:42', '19:34');
+insert into Hour (start, end) values ('18:26', '1:11');
+insert into Hour (start, end) values ('23:01', '22:06');
+insert into Hour (start, end) values ('16:53', '20:40');
+insert into Hour (start, end) values ('1:56', '11:14');
+insert into Hour (start, end) values ('3:04', '20:15');
+insert into Hour (start, end) values ('20:44', '12:08');
+insert into Hour (start, end) values ('18:28', '5:15');
+insert into Hour (start, end) values ('6:34', '13:07');
+insert into Hour (start, end) values ('3:06', '15:52');
+insert into Hour (start, end) values ('22:33', '6:28');
+insert into Hour (start, end) values ('8:43', '3:13');
+insert into Hour (start, end) values ('6:35', '19:32');
+insert into Hour (start, end) values ('20:22', '11:29');
+insert into Hour (start, end) values ('16:40', '12:57');
+insert into Hour (start, end) values ('8:37', '6:32');
+insert into Hour (start, end) values ('18:45', '15:08');
+insert into Hour (start, end) values ('19:23', '10:25');
+insert into Hour (start, end) values ('1:06', '8:12');
+insert into Hour (start, end) values ('11:17', '12:20');
+insert into Hour (start, end) values ('0:38', '17:43');
+insert into Hour (start, end) values ('20:30', '14:36');
+insert into Hour (start, end) values ('0:24', '4:56');
+insert into Hour (start, end) values ('13:22', '0:21');
+insert into Hour (start, end) values ('8:54', '21:30');
+insert into Hour (start, end) values ('7:16', '10:51');
+insert into Hour (start, end) values ('10:50', '18:23');
+insert into Hour (start, end) values ('9:21', '10:21');
+insert into Hour (start, end) values ('3:37', '23:28');
+insert into Hour (start, end) values ('2:30', '23:51');
+insert into Hour (start, end) values ('19:31', '1:22');
+insert into Hour (start, end) values ('6:47', '9:09');
+insert into Hour (start, end) values ('2:06', '23:34');
+insert into Hour (start, end) values ('6:49', '22:05');
+insert into Hour (start, end) values ('10:52', '13:50');
+insert into Hour (start, end) values ('4:44', '10:47');
+insert into Hour (start, end) values ('3:58', '4:12');
+insert into Hour (start, end) values ('18:15', '6:15');
+insert into Hour (start, end) values ('19:21', '19:24');
+insert into Hour (start, end) values ('3:20', '14:14');
+insert into Hour (start, end) values ('5:00', '10:01');
+insert into Hour (start, end) values ('14:30', '4:35');
+insert into Hour (start, end) values ('12:42', '12:51');
+insert into Hour (start, end) values ('22:10', '14:20');
+insert into Hour (start, end) values ('2:35', '18:56');
+insert into Hour (start, end) values ('4:33', '22:12');
+insert into Hour (start, end) values ('1:53', '1:33');
+insert into Hour (start, end) values ('2:42', '9:51');
+insert into Hour (start, end) values ('5:29', '4:25');
+insert into Hour (start, end) values ('15:05', '21:22');
+insert into Hour (start, end) values ('18:22', '1:52');
+insert into Hour (start, end) values ('21:05', '23:27');
+insert into Hour (start, end) values ('15:56', '13:09');
+insert into Hour (start, end) values ('0:47', '18:53');
+insert into Hour (start, end) values ('19:41', '8:01');
+insert into Hour (start, end) values ('16:47', '9:11');
+insert into Hour (start, end) values ('20:15', '3:04');
+insert into Hour (start, end) values ('6:20', '18:32');
+insert into Hour (start, end) values ('6:38', '0:55');
+insert into Hour (start, end) values ('20:34', '19:03');
+insert into Hour (start, end) values ('23:13', '17:29');
+insert into Hour (start, end) values ('12:43', '16:20');
+insert into Hour (start, end) values ('17:33', '9:49');
+insert into Hour (start, end) values ('10:00', '10:58');
+insert into Hour (start, end) values ('22:31', '7:34');
+insert into Hour (start, end) values ('18:15', '6:48');
+insert into Hour (start, end) values ('3:44', '2:59');
+insert into Hour (start, end) values ('14:41', '9:03');
+insert into Hour (start, end) values ('0:57', '9:10');
+insert into Hour (start, end) values ('8:09', '16:40');
+insert into Hour (start, end) values ('1:32', '5:28');
+insert into Hour (start, end) values ('5:22', '5:20');
+insert into Hour (start, end) values ('1:56', '21:03');
+insert into Hour (start, end) values ('10:58', '2:16');
+insert into Hour (start, end) values ('0:21', '4:02');
+insert into Hour (start, end) values ('18:13', '7:42');
+insert into Hour (start, end) values ('12:48', '16:35');
+insert into Hour (start, end) values ('18:27', '23:31');
+insert into Hour (start, end) values ('21:13', '23:58');
+insert into Hour (start, end) values ('5:23', '18:58');
+insert into Hour (start, end) values ('8:43', '16:46');
+insert into Hour (start, end) values ('2:14', '3:22');
+insert into Hour (start, end) values ('19:25', '19:03');
+insert into Hour (start, end) values ('16:51', '20:01');
+insert into Hour (start, end) values ('0:20', '6:38');
+insert into Hour (start, end) values ('16:56', '10:08');
+
+insert into Credential (username, password, id_h) values ('Elita', 'a2ce6dd5cbb19b8cb1db7318891fbf23ac0716dd01a87260d79f129e6831f78d', 1);
+insert into Credential (username, password, id_h) values ('elita', 'd2ddad42d2d226963df0e3941739ea552ae013deba2b99ee058c0f57a2a84826', 2);
+insert into Credential (username, password, id_h) values ('Blaine', '651a32fee28af6cd3f4d4bec7f72399a91662c0d3d5c6790249fd6611feb6c02', 51);
+insert into Credential (username, password, id_h) values ('Hanson', '476ec5da148149773962126856b33150bafe36c61a5095342d448852950b74f6', 3);
+insert into Credential (username, password, id_h) values ('Annamark', '7ffb2f9ed5f607f43f5b48cd7ef022577f9b7d366816163f6c09627550e5c642', 4);
+insert into Credential (username, password, id_h) values ('Meadow Ridge', 'b8f0541e665c5f820a66df61ed963926140a6890b7645e1fcb3609d91e1b215b', 5);
+insert into Credential (username, password, id_h) values ('Straubel', '0966501da99634c87a47157cc0c7414e78f8cd9f6cf10db5bc93e4c664159a66', 6);
+insert into Credential (username, password, id_h) values ('Porter', 'c138988db43be047b8e0171e79bf23b8b56ca2ecbc1100a5f65be3f03753e600', 7);
+insert into Credential (username, password, id_h) values ('Kinsman', '313923e2e292c6414a4ef8cd058825857bd89d6fec44d8112d1f401e46c24f67', 8);
+insert into Credential (username, password, id_h) values ('Delladonna', 'd5a51384c7d97e6ad3d27d1543d3a1da762c5ce6fcecfcdb4d03b38d2bc54fee', 9);
+insert into Credential (username, password, id_h) values ('Village Green', 'b4a115bd99fca952a2ceffb52da4427bf49d2563492a43f28c2653e4b28dbf72', 10);
+insert into Credential (username, password, id_h) values ('Amoth', '770eaaaa9ce82941009f18d02090eedbe174474bae2b0653c75c55dceabe87f5', 11);
+insert into Credential (username, password, id_h) values ('Lakeland', '9482f9c26d786e68e3b2555c87b60cefda26fbb534fa4fe6d8505f6975ccccd7', 12);
+insert into Credential (username, password, id_h) values ('Haas', 'aed1cdd547df7608ad144cc56d0e5a69a49cc60d967a2ed66542fe78930a6829', 13);
+insert into Credential (username, password, id_h) values ('Eastlawn', 'dc12889c2b5ede1df88634cb966ef90d2cd0844dda3fcf761a637bab076edbc2', 14);
+insert into Credential (username, password, id_h) values ('Daystar', '4df67b0eca92d5fbd2dddedeb9a85d5d284cdb5641f4b6905b4e704c107223b9', 15);
+insert into Credential (username, password, id_h) values ('Blackbird', '8192f3c3b891a8c0a17489117a053d3cb49e7d17b4d81f42cbc9d4eec61f1c8d', 16);
+insert into Credential (username, password, id_h) values ('Onsgard', '2a9c43caa89bbbc81a9902ac29dfcde39fc1d8333ff85aa1b3c4996f95c01978', 17);
+insert into Credential (username, password, id_h) values ('Moulton', 'aacc23c19f48faf11df48afe57ef0a2fc00c56dc9376dde75eff0a406be3ec71', 18);
+insert into Credential (username, password, id_h) values ('Cardinal', 'bc4dfee08f8213cbf3a97d92a53fa976c6f5a42e58c530bbe419fa7ac606a956', 19);
+insert into Credential (username, password, id_h) values ('Messerschmidt', '8089a515def2e77f071d6141aeffadf5e49d4bcab7df35a73fd271d38b9f92ec', 20);
+insert into Credential (username, password, id_h) values ('Merry', '88257cff1f9c6465b1b5bf0ce8cc47cc3141027296e29dec9cbf758ff57c8fc9', 21);
+insert into Credential (username, password, id_h) values ('Gina', '32ac70937932c2a4dafef292edfdfd64d2f9a4a51d66ca09ab0888400dde7bc9', 22);
+insert into Credential (username, password, id_h) values ('Bayside', 'f51ea8d9df389edc9627b3b5a87bf86bfeab9e8f1b2ca3c6ef30df82c8efd0ff', 23);
+insert into Credential (username, password, id_h) values ('Anzinger', 'cafeb5e6447e77b65c221a26222b85bf9d42746d7500511753eedd649e8bb59d', 24);
+insert into Credential (username, password, id_h) values ('Reinke', 'b253bdf25e534aac2952e97201c8eae8ccd6755c3c633a80f7f70ef4235f06a5', 25);
+insert into Credential (username, password, id_h) values ('Morning', 'b8b03a9f082e1949190e28395bdaec7fbf63c6eca82b14e8679a53b2ff6cf147', 26);
+insert into Credential (username, password, id_h) values ('Emmet', '8be44f2acc8b6302c2627d845adfcbe089d643cb32a4ec1d64bcf704c530998d', 27);
+insert into Credential (username, password, id_h) values ('Hanover', '8bab48048cd31a0646a3e36e310b733ac5916ba80d40e56da8cac364b4b52ae0', 28);
+insert into Credential (username, password, id_h) values ('Northview', '63b9101d4a30e675b5b831bd3a0302e949419a9e8798a1a49d5b2d74b895908a', 29);
+insert into Credential (username, password, id_h) values ('Heffernan', 'c8a078e8edba5a2d8adcee8b34c154b56e8af77c43fe8848ac1b8b7b81ca1761', 30);
+insert into Credential (username, password, id_h) values ('Melrose', '1c5873bf7d36881617c72309f815054d05311a4cb4b8a62558bd28d1c8d054b9', 31);
+insert into Credential (username, password, id_h) values ('Hoffman', '330a6d99e7959123c8faba866439d70ada5f20278f84b1af38381539f5672f4d', 32);
+insert into Credential (username, password, id_h) values ('Lawn', 'f82da3e298ae8a406aa97a702e6466c101178715b7e3d9ce3abd1dbdf383494a', 33);
+insert into Credential (username, password, id_h) values ('Shopko', 'dd6f33864043c92bcd54c7d6422c62edbcbf57e7ea29481ada38db2bba9d92ce', 34);
+insert into Credential (username, password, id_h) values ('Onsgard', 'd0ebf5e00eb495d5a511c13c7269cd041d062e5d9cad8db4fabc2a82f600a84c', 35);
+insert into Credential (username, password, id_h) values ('Fallview', 'ba8e4b9dbc394db2b024a934b99fab19432f49bbf7df9547b491e9e4e1899e0b', 36);
+insert into Credential (username, password, id_h) values ('Mariners Cove', '1f93e0641790700233c41ef0bb1e79e1214a567343f3b16d3781695a632de7aa', 37);
+insert into Credential (username, password, id_h) values ('5th', '009d48484853b4b3fbf93edcfcf55d20a47950abac918bb12201a349d0fd5032', 38);
+insert into Credential (username, password, id_h) values ('Truax', 'f5c606d6f33431d1c31a93846adfefb486849a6a13a1623e7cff083685df35fc', 39);
+insert into Credential (username, password, id_h) values ('Clemons', '5fad2aa2f74bba0144e3bc8a668e8df67b077752e36ca625a69cf229d9f3a475', 40);
+insert into Credential (username, password, id_h) values ('Fordem', 'a997078bc0bda3912ebc58f6a554f613472e284dadae609cfcbf9b1829720a10', 41);
+insert into Credential (username, password, id_h) values ('Londonderry', 'ee1ab55ef893de46c85ff8ab1d3cb349448e59f8f4ac17e70cfc910c3a1e96e9', 42);
+insert into Credential (username, password, id_h) values ('Fulton', '87908181b505ee52888613cb7ed52818c2534345b6f947635294048bc0846421', 43);
+insert into Credential (username, password, id_h) values ('Lerdahl', '32c7964e8f89815ae2d254e29f2287a139c1267ad46560b59a969c5dfc82e355', 44);
+insert into Credential (username, password, id_h) values ('Becker', 'b0db79126bd022e83e6429f213cf3021fa6cfa421ee720c392095d690af059e6', 45);
+insert into Credential (username, password, id_h) values ('Crownhardt', '3bcb19171b8e66a98d3af465c4e9c765494de20e612a81d8feeaf7c2a75caef5', 46);
+insert into Credential (username, password, id_h) values ('5th', 'bb8ddfd492e07465e23da5bcc7fcd5404198540fb0f4c0b654a1c6551813c328', 47);
+insert into Credential (username, password, id_h) values ('Maywood', '9e4227bfc4a36782db2cc0087aa4378ff6b91fdd40c254278ea75a3f7080206e', 48);
+insert into Credential (username, password, id_h) values ('Jenifer', 'fb99e66551817ae48721acbe084adc31fa7005df2d64b0ecd391741b1feae6c8', 49);
+insert into Credential (username, password, id_h) values ('Homewood', '82d4ebd8c6999f4dade440afbb735e3fde58e733a8fb75786341fa436a3c8154', 50);
+
+
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('E01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+insert into Classroom (room_number) values ('A01');
+
+insert into Subject (name,sh_name) values ('Slovenščina', 'SLO');
+insert into Subject (name,sh_name) values ('Matematika', 'MAT');
+insert into Subject (name,sh_name) values ('Sociologija', 'SOC');
+insert into Subject (name,sh_name) values ('Angleščina', 'ANG');
+insert into Subject (name,sh_name) values ('Nemščina', 'NEM');
+insert into Subject (name,sh_name) values ('Športna vzgoja', 'ŠVZ');
+insert into Subject (name,sh_name) values ('Razredna ura', 'RU');
+insert into Subject (name,sh_name) values ('Malica', 'ML');
+insert into Subject (name,sh_name) values ('Biologija', 'BIO');
+insert into Subject (name,sh_name) values ('Kemija', 'KEM');
+insert into Subject (name,sh_name) values ('Naravoslovje', 'NAR');
+insert into Subject (name,sh_name) values ('Tehnika', 'TEH');
+insert into Subject (name,sh_name) values ('Naravoslovje in tehnika', 'NIT');
+insert into Subject (name,sh_name) values ('Fizika', 'FIZ');
+
+insert into Teacher (name, surname, email, gender) values ('Merna', 'Streets', 'mstreets0@hostgator.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Gwendolyn', 'Tomankowski', 'gtomankowski1@shareasale.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Stu', 'Grimolbie', 'sgrimolbie2@example.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Lezlie', 'Hedde', 'lhedde3@mediafire.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Torrance', 'Waker', 'twaker4@hp.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Sully', 'Birkwood', 'sbirkwood5@go.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Rahal', 'Bemment', 'rbemment6@aol.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Dulcinea', 'McElwee', 'dmcelwee7@reddit.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Nyssa', 'Bisterfeld', 'nbisterfeld8@1688.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Normie', 'Gytesham', 'ngytesham9@go.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Flss', 'Parsons', 'fparsonsa@miitbeian.gov.cn', 'F');
+insert into Teacher (name, surname, email, gender) values ('Sloan', 'McNirlin', 'smcnirlinb@fastcompany.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Gaelan', 'Yitzhak', 'gyitzhakc@dagondesign.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Dolly', 'Tenant', 'dtenantd@tinypic.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Ludvig', 'Broderick', 'lbrodericke@live.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Agathe', 'Scotney', 'ascotneyf@dailymotion.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Evan', 'Sprules', 'esprulesg@adobe.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Lindsey', 'Whitley', 'lwhitleyh@cbsnews.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Kerwin', 'Booy', 'kbooyi@auda.org.au', 'M');
+insert into Teacher (name, surname, email, gender) values ('Lexi', 'Cassels', 'lcasselsj@ucla.edu', 'F');
+insert into Teacher (name, surname, email, gender) values ('Edmund', 'Curson', 'ecursonk@de.vu', 'M');
+insert into Teacher (name, surname, email, gender) values ('Kyle', 'Morteo', 'kmorteol@scientificamerican.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Rickert', 'Imloch', 'rimlochm@pen.io', 'M');
+insert into Teacher (name, surname, email, gender) values ('Grayce', 'Leechman', 'gleechmann@wsj.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Ginger', 'Coveley', 'gcoveleyo@devhub.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Dur', 'Hacquard', 'dhacquardp@ifeng.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Pail', 'Piecha', 'ppiechaq@hatena.ne.jp', 'M');
+insert into Teacher (name, surname, email, gender) values ('Arlen', 'Finessy', 'afinessyr@macromedia.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Cornall', 'Jarvie', 'cjarvies@google.ru', 'M');
+insert into Teacher (name, surname, email, gender) values ('Maureen', 'MacIlraith', 'mmacilraitht@scientificamerican.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Iorgo', 'Lahiff', 'ilahiffu@npr.org', 'M');
+insert into Teacher (name, surname, email, gender) values ('Tiphany', 'Gillies', 'tgilliesv@cnn.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Calypso', 'Bedminster', 'cbedminsterw@columbia.edu', 'F');
+insert into Teacher (name, surname, email, gender) values ('Feliks', 'Caze', 'fcazex@nature.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Stillmann', 'Broseke', 'sbrosekey@wix.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Kittie', 'Hembry', 'khembryz@fda.gov', 'F');
+insert into Teacher (name, surname, email, gender) values ('Nesta', 'Ankers', 'nankers10@1und1.de', 'F');
+insert into Teacher (name, surname, email, gender) values ('Lulita', 'Faber', 'lfaber11@google.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Teodora', 'Betty', 'tbetty12@barnesandnoble.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Geri', 'Old', 'gold13@slate.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Alix', 'Songust', 'asongust14@live.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Bendick', 'Edgeley', 'bedgeley15@cbslocal.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Dagmar', 'Grahlman', 'dgrahlman16@4shared.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Ivar', 'Jossel', 'ijossel17@livejournal.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Carlo', 'Wolfarth', 'cwolfarth18@usa.gov', 'M');
+insert into Teacher (name, surname, email, gender) values ('Adria', 'Fulloway', 'afulloway19@360.cn', 'F');
+insert into Teacher (name, surname, email, gender) values ('Katerina', 'Sudron', 'ksudron1a@fc2.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Welsh', 'Lehrer', 'wlehrer1b@4shared.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Eleni', 'Wybern', 'ewybern1c@lycos.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Tansy', 'Tumulty', 'ttumulty1d@stumbleupon.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Aggie', 'Ccomini', 'accomini1e@networkadvertising.org', 'F');
+insert into Teacher (name, surname, email, gender) values ('Kippy', 'Sarten', 'ksarten1f@ox.ac.uk', 'M');
+insert into Teacher (name, surname, email, gender) values ('Currey', 'Shermar', 'cshermar1g@addthis.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Christoforo', 'Duthy', 'cduthy1h@elegantthemes.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Noe', 'Leidecker', 'nleidecker1i@ehow.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Joseito', 'Boissieux', 'jboissieux1j@huffingtonpost.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Moshe', 'Probet', 'mprobet1k@tinypic.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Somerset', 'Wallett', 'swallett1l@deliciousdays.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Shaylah', 'Jaycock', 'sjaycock1m@yahoo.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Manda', 'Brougham', 'mbrougham1n@google.pl', 'F');
+insert into Teacher (name, surname, email, gender) values ('Maddie', 'Dudny', 'mdudny1o@mtv.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Forrester', 'Tallquist', 'ftallquist1p@vistaprint.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Sybille', 'Gaynsford', 'sgaynsford1q@google.ca', 'F');
+insert into Teacher (name, surname, email, gender) values ('Wadsworth', 'Harry', 'wharry1r@yahoo.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Bevvy', 'Huyge', 'bhuyge1s@un.org', 'F');
+insert into Teacher (name, surname, email, gender) values ('Lynnelle', 'Oleshunin', 'loleshunin1t@slate.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Katy', 'Jakes', 'kjakes1u@amazon.de', 'F');
+insert into Teacher (name, surname, email, gender) values ('Lavena', 'Kamienski', 'lkamienski1v@scientificamerican.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Roberto', 'Swancott', 'rswancott1w@barnesandnoble.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Randal', 'Parcell', 'rparcell1x@last.fm', 'M');
+insert into Teacher (name, surname, email, gender) values ('Egan', 'Brader', 'ebrader1y@twitter.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Ynez', 'Edson', 'yedson1z@uol.com.br', 'F');
+insert into Teacher (name, surname, email, gender) values ('Darya', 'Bartusek', 'dbartusek20@facebook.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Levin', 'Johnstone', 'ljohnstone21@state.tx.us', 'M');
+insert into Teacher (name, surname, email, gender) values ('Moina', 'Brisard', 'mbrisard22@upenn.edu', 'F');
+insert into Teacher (name, surname, email, gender) values ('Ryann', 'Kock', 'rkock23@auda.org.au', 'F');
+insert into Teacher (name, surname, email, gender) values ('Cleveland', 'Oakenford', 'coakenford24@flavors.me', 'M');
+insert into Teacher (name, surname, email, gender) values ('Mariette', 'Bolens', 'mbolens25@wordpress.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Agata', 'Glossup', 'aglossup26@accuweather.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Silvana', 'Luchetti', 'sluchetti27@sphinn.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Sargent', 'Ales0', 'sales28@clickbank.net', 'M');
+insert into Teacher (name, surname, email, gender) values ('Otes', 'Balas', 'obalas29@jugem.jp', 'M');
+insert into Teacher (name, surname, email, gender) values ('Shaine', 'Girardez', 'sgirardez2a@wordpress.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Goddart', 'Culpin', 'gculpin2b@springer.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Dorice', 'Viall', 'dviall2c@ow.ly', 'F');
+insert into Teacher (name, surname, email, gender) values ('Bari', 'Blackly', 'bblackly2d@ehow.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Frazer', 'Hullot', 'fhullot2e@xrea.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Clayborn', 'Heibel', 'cheibel2f@hexun.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Zoe', 'Ambrosi', 'zambrosi2g@flavors.me', 'F');
+insert into Teacher (name, surname, email, gender) values ('Harley', 'Bilbrook', 'hbilbrook2h@youtu.be', 'F');
+insert into Teacher (name, surname, email, gender) values ('Winifred', 'Heinemann', 'wheinemann2i@nbcnews.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Leeanne', 'Gommey', 'lgommey2j@moonfruit.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Delainey', 'Postlethwaite', 'dpostlethwaite2k@ted.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Karna', 'Llewellen', 'kllewellen2l@youku.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Constantino', 'Grahlmans', 'cgrahlmans2m@deviantart.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Hanni', 'Bronger', 'hbronger2n@altervista.org', 'F');
+insert into Teacher (name, surname, email, gender) values ('Linnea', 'Chisnall', 'lchisnall2o@mediafire.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Gustie', 'Saladin', 'gsaladin2p@seattletimes.com', 'F');
+insert into Teacher (name, surname, email, gender) values ('Erroll', 'Sainsberry', 'esainsberry2q@devhub.com', 'M');
+insert into Teacher (name, surname, email, gender) values ('Suzanna', 'Scotchmoor', 'sscotchmoor2r@businessweek.com', 'F');
+
+
+
+
 
