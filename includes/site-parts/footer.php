@@ -4,9 +4,9 @@
               <div id='social_media_section'>
                 <h4>Spremljajte nas</h4>
                 <div id='social_media_links'>
-                  <a class='social_media_link' href='https://github.com/EncryptedShoesHD'><img src='images/github_dark.png' width='30px' height='30px'><p>Tomaž Bizjak</p></a>
-                  <a class='social_media_link' href='https://github.com/profek10'><img src='images/github_dark.png' width='30px' height='30px'><p>Aleksander Grobelnik</p></a>
-                  <a class='social_media_link' href='https://github.com/lovrofrece'><img src='images/github_dark.png' width='30px' height='30px'><p>Lovro Frece</p></a>
+                  <a class='social_media_link' href='https://github.com/EncryptedShoesHD'><img src='" . $rootFolder . "images/github_dark.png' width='30px' height='30px'><p>Tomaž Bizjak</p></a>
+                  <a class='social_media_link' href='https://github.com/profek10'><img src='" . $rootFolder . "images/github_dark.png' width='30px' height='30px'><p>Aleksander Grobelnik</p></a>
+                  <a class='social_media_link' href='https://github.com/lovrofrece'><img src='" . $rootFolder . "images/github_dark.png' width='30px' height='30px'><p>Lovro Frece</p></a>
                 </div>
               </div>
               <div id='contact_us'>
@@ -19,7 +19,7 @@
               </div>
               <div id='send_a_message'>
                 <h4>Pošljite nam sporočilo</h4>
-                <a href='contact_us.php'><button>KONTAKT</button></a>
+                <a href='" . $rootFolder . "contact_us.php'><button>KONTAKT</button></a>
               </div>
             </div>
             <div id='copyright_note'>

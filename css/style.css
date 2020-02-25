@@ -111,16 +111,20 @@ a {
   text-align: left;
 }
 
-button {
-  background-color: #131335;
+button, input[type='submit'] {
+  background-color: #363696;
   color: white;
   border: none;
   border-radius: 5px;
+  text-transform: uppercase;
+}
+
+button {
   padding: 15px 10%;
 }
 
-button:hover {
-  background-color: #363696;
+button:hover, input[type='submit']:hover {
+  background-color: #131335;
 }
 
 h4 {
@@ -139,4 +143,76 @@ h4 {
   font-size: 50px;
   text-align: center;
   color: #4744ff;
+}
+
+form[id='login'] {
+  width: 30%;
+  margin-left: calc(35%);
+  border: solid 1px #e2e2e2;
+  text-align: left;
+  padding: 0 15px 15px 15px;
+  border-top: solid 4px #4744ff;
+  border-bottom: none;
+  margin-bottom: 0;
+  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.5);
+}
+
+form>#instruction {
+  font-size: 17px;
+}
+
+form>label {
+  opacity: 0.9;
+  margin: 0 5%;
+  padding: 5px 0;
+}
+
+form>input:not([type='submit']) {
+  width: 90%;
+  margin: 8px 5% 14px 5%;
+  border: solid 1px #d9d9d9;
+  padding: 10px 15px;
+}
+
+form>input:not([type='submit']):focus {
+  outline-style: solid 1px;
+  outline-color: blue;
+}
+
+form>input:not([type='submit']):valid {
+  outline-style: solid 1px;
+  outline-color: #00967D;
+}
+
+form>input:not([type='submit']):invalid {
+  outline-style: solid 1px;
+  outline-color: #DB504A;
+}
+
+form>input[type='submit'] {
+  width: 40%;
+  margin: 10px 30%;
+  padding: 10px;
+}
+
+#noacc_fp {
+  width: 30%;
+  background-color: #f2f2f2;
+  margin-left: 35%;
+  padding: 0 15px 5px 15px;
+  border: solid 1px #e2e2e2;
+  border-top: none;
+  margin-bottom: 60px;
+  box-shadow: 0px 3px 8px 0px rgba(0,0,0,0.5);
+}
+
+#noacc_fp>a{
+  color: #333333;
+  display: block;
+  padding: 10px 0 5px 0;
+}
+
+#noacc_fp>a:hover {
+  color: #4744ff;
+  font-weight: bold;
 }
