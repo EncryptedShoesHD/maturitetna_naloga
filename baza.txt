@@ -1,14 +1,10 @@
-Drop table if exists Hour; 
-
+Drop table if exists Lesson;
+Drop table if exists Credential; 
 Drop table if exists Classroom;
-
 Drop table if exists Teacher;
-
 Drop table if exists Hour;
-
 Drop table if exists Subject; 
 
-Drop table if exists Lesson;
 
 Create table Lesson(
 	id_t Integer NOT NULL,
@@ -16,60 +12,57 @@ Create table Lesson(
 	id_cr Integer NOT NULL,
 	id_h Integer NOT NULL,
 Primary Key  (id_t,id_s)
-) 
-
+);
 
 Create table Subject(
-	id_s Integer NOT NULL,
+	id_s Integer NOT NULL AUTO_INCREMENT,
 	name Varchar(50) NOT NULL,
 	sh_name Varchar(50) NOT NULL,
 Primary Key  (id_s)
-) 
-
+);
 
 Create table Hour(
-	id_h Integer NOT NULL,
+	id_h Integer NOT NULL AUTO_INCREMENT,
 	start Datetime NOT NULL,
 	end Datetime NOT NULL,
 Primary Key  (id_h)
-) 
+);
 
 
 Create table Teacher(
-	id_t Integer NOT NULL,
+	id_t Integer NOT NULL AUTO_INCREMENT,
 	name Varchar(50) NOT NULL,
 	surname Varchar(50) NOT NULL,
 	email VARCHAR(320) NOT NULL,
 	gender Char(1) NOT NULL,
 Primary Key  (id_t)
-) 
-
-
+);
 
 Create table Classroom(
-	id_cr Integer NOT NULL,
+	id_cr Integer NOT NULL AUTO_INCREMENT,
 	room_number Varchar(20) NOT NULL,
 Primary Key  (id_cr)
-) 
+);
 
 
 Create table Credential(
-	id_c Integer NOT NULL,
+	id_c Integer NOT NULL AUTO_INCREMENT,
 	username Varchar(20) NOT NULL UNIQUE,
 	password Varchar(64) NOT NULL,
+	email VARCHAR(320) NOT NULL,
 	id_h Integer NOT NULL,
 Primary Key  (id_c)
-) 
+);
 
-Alter table Lesson add  foreign key(id_s) references Subject (id_s) 
+Alter table Lesson add  foreign key(id_s) references Subject (id_s); 
 
-Alter table Lesson add  foreign key(id_h) references Hour (id_h) 
+Alter table Lesson add  foreign key(id_h) references Hour (id_h);
 
-Alter table Credential add  foreign key(id_h) references Hour (id_h) 
+Alter table Credential add  foreign key(id_h) references Hour (id_h); 
 
-Alter table Lesson add  foreign key(id_t) references Teacher (id_t) 
+Alter table Lesson add  foreign key(id_t) references Teacher (id_t);
 
-Alter table Lesson add  foreign key(id_cr) references Classroom (id_cr) 
+Alter table Lesson add  foreign key(id_cr) references Classroom (id_cr);
 
 insert into Hour (start, end) values ('19:48', '9:39');
 insert into Hour (start, end) values ('22:54', '1:48');
@@ -172,57 +165,56 @@ insert into Hour (start, end) values ('16:51', '20:01');
 insert into Hour (start, end) values ('0:20', '6:38');
 insert into Hour (start, end) values ('16:56', '10:08');
 
-insert into Credential (username, password, id_h) values ('Elita', 'a2ce6dd5cbb19b8cb1db7318891fbf23ac0716dd01a87260d79f129e6831f78d', 1);
-insert into Credential (username, password, id_h) values ('elita', 'd2ddad42d2d226963df0e3941739ea552ae013deba2b99ee058c0f57a2a84826', 2);
-insert into Credential (username, password, id_h) values ('Blaine', '651a32fee28af6cd3f4d4bec7f72399a91662c0d3d5c6790249fd6611feb6c02', 51);
-insert into Credential (username, password, id_h) values ('Hanson', '476ec5da148149773962126856b33150bafe36c61a5095342d448852950b74f6', 3);
-insert into Credential (username, password, id_h) values ('Annamark', '7ffb2f9ed5f607f43f5b48cd7ef022577f9b7d366816163f6c09627550e5c642', 4);
-insert into Credential (username, password, id_h) values ('Meadow Ridge', 'b8f0541e665c5f820a66df61ed963926140a6890b7645e1fcb3609d91e1b215b', 5);
-insert into Credential (username, password, id_h) values ('Straubel', '0966501da99634c87a47157cc0c7414e78f8cd9f6cf10db5bc93e4c664159a66', 6);
-insert into Credential (username, password, id_h) values ('Porter', 'c138988db43be047b8e0171e79bf23b8b56ca2ecbc1100a5f65be3f03753e600', 7);
-insert into Credential (username, password, id_h) values ('Kinsman', '313923e2e292c6414a4ef8cd058825857bd89d6fec44d8112d1f401e46c24f67', 8);
-insert into Credential (username, password, id_h) values ('Delladonna', 'd5a51384c7d97e6ad3d27d1543d3a1da762c5ce6fcecfcdb4d03b38d2bc54fee', 9);
-insert into Credential (username, password, id_h) values ('Village Green', 'b4a115bd99fca952a2ceffb52da4427bf49d2563492a43f28c2653e4b28dbf72', 10);
-insert into Credential (username, password, id_h) values ('Amoth', '770eaaaa9ce82941009f18d02090eedbe174474bae2b0653c75c55dceabe87f5', 11);
-insert into Credential (username, password, id_h) values ('Lakeland', '9482f9c26d786e68e3b2555c87b60cefda26fbb534fa4fe6d8505f6975ccccd7', 12);
-insert into Credential (username, password, id_h) values ('Haas', 'aed1cdd547df7608ad144cc56d0e5a69a49cc60d967a2ed66542fe78930a6829', 13);
-insert into Credential (username, password, id_h) values ('Eastlawn', 'dc12889c2b5ede1df88634cb966ef90d2cd0844dda3fcf761a637bab076edbc2', 14);
-insert into Credential (username, password, id_h) values ('Daystar', '4df67b0eca92d5fbd2dddedeb9a85d5d284cdb5641f4b6905b4e704c107223b9', 15);
-insert into Credential (username, password, id_h) values ('Blackbird', '8192f3c3b891a8c0a17489117a053d3cb49e7d17b4d81f42cbc9d4eec61f1c8d', 16);
-insert into Credential (username, password, id_h) values ('Onsgard', '2a9c43caa89bbbc81a9902ac29dfcde39fc1d8333ff85aa1b3c4996f95c01978', 17);
-insert into Credential (username, password, id_h) values ('Moulton', 'aacc23c19f48faf11df48afe57ef0a2fc00c56dc9376dde75eff0a406be3ec71', 18);
-insert into Credential (username, password, id_h) values ('Cardinal', 'bc4dfee08f8213cbf3a97d92a53fa976c6f5a42e58c530bbe419fa7ac606a956', 19);
-insert into Credential (username, password, id_h) values ('Messerschmidt', '8089a515def2e77f071d6141aeffadf5e49d4bcab7df35a73fd271d38b9f92ec', 20);
-insert into Credential (username, password, id_h) values ('Merry', '88257cff1f9c6465b1b5bf0ce8cc47cc3141027296e29dec9cbf758ff57c8fc9', 21);
-insert into Credential (username, password, id_h) values ('Gina', '32ac70937932c2a4dafef292edfdfd64d2f9a4a51d66ca09ab0888400dde7bc9', 22);
-insert into Credential (username, password, id_h) values ('Bayside', 'f51ea8d9df389edc9627b3b5a87bf86bfeab9e8f1b2ca3c6ef30df82c8efd0ff', 23);
-insert into Credential (username, password, id_h) values ('Anzinger', 'cafeb5e6447e77b65c221a26222b85bf9d42746d7500511753eedd649e8bb59d', 24);
-insert into Credential (username, password, id_h) values ('Reinke', 'b253bdf25e534aac2952e97201c8eae8ccd6755c3c633a80f7f70ef4235f06a5', 25);
-insert into Credential (username, password, id_h) values ('Morning', 'b8b03a9f082e1949190e28395bdaec7fbf63c6eca82b14e8679a53b2ff6cf147', 26);
-insert into Credential (username, password, id_h) values ('Emmet', '8be44f2acc8b6302c2627d845adfcbe089d643cb32a4ec1d64bcf704c530998d', 27);
-insert into Credential (username, password, id_h) values ('Hanover', '8bab48048cd31a0646a3e36e310b733ac5916ba80d40e56da8cac364b4b52ae0', 28);
-insert into Credential (username, password, id_h) values ('Northview', '63b9101d4a30e675b5b831bd3a0302e949419a9e8798a1a49d5b2d74b895908a', 29);
-insert into Credential (username, password, id_h) values ('Heffernan', 'c8a078e8edba5a2d8adcee8b34c154b56e8af77c43fe8848ac1b8b7b81ca1761', 30);
-insert into Credential (username, password, id_h) values ('Melrose', '1c5873bf7d36881617c72309f815054d05311a4cb4b8a62558bd28d1c8d054b9', 31);
-insert into Credential (username, password, id_h) values ('Hoffman', '330a6d99e7959123c8faba866439d70ada5f20278f84b1af38381539f5672f4d', 32);
-insert into Credential (username, password, id_h) values ('Lawn', 'f82da3e298ae8a406aa97a702e6466c101178715b7e3d9ce3abd1dbdf383494a', 33);
-insert into Credential (username, password, id_h) values ('Shopko', 'dd6f33864043c92bcd54c7d6422c62edbcbf57e7ea29481ada38db2bba9d92ce', 34);
-insert into Credential (username, password, id_h) values ('Onsgard', 'd0ebf5e00eb495d5a511c13c7269cd041d062e5d9cad8db4fabc2a82f600a84c', 35);
-insert into Credential (username, password, id_h) values ('Fallview', 'ba8e4b9dbc394db2b024a934b99fab19432f49bbf7df9547b491e9e4e1899e0b', 36);
-insert into Credential (username, password, id_h) values ('Mariners Cove', '1f93e0641790700233c41ef0bb1e79e1214a567343f3b16d3781695a632de7aa', 37);
-insert into Credential (username, password, id_h) values ('5th', '009d48484853b4b3fbf93edcfcf55d20a47950abac918bb12201a349d0fd5032', 38);
-insert into Credential (username, password, id_h) values ('Truax', 'f5c606d6f33431d1c31a93846adfefb486849a6a13a1623e7cff083685df35fc', 39);
-insert into Credential (username, password, id_h) values ('Clemons', '5fad2aa2f74bba0144e3bc8a668e8df67b077752e36ca625a69cf229d9f3a475', 40);
-insert into Credential (username, password, id_h) values ('Fordem', 'a997078bc0bda3912ebc58f6a554f613472e284dadae609cfcbf9b1829720a10', 41);
-insert into Credential (username, password, id_h) values ('Londonderry', 'ee1ab55ef893de46c85ff8ab1d3cb349448e59f8f4ac17e70cfc910c3a1e96e9', 42);
-insert into Credential (username, password, id_h) values ('Fulton', '87908181b505ee52888613cb7ed52818c2534345b6f947635294048bc0846421', 43);
-insert into Credential (username, password, id_h) values ('Lerdahl', '32c7964e8f89815ae2d254e29f2287a139c1267ad46560b59a969c5dfc82e355', 44);
-insert into Credential (username, password, id_h) values ('Becker', 'b0db79126bd022e83e6429f213cf3021fa6cfa421ee720c392095d690af059e6', 45);
-insert into Credential (username, password, id_h) values ('Crownhardt', '3bcb19171b8e66a98d3af465c4e9c765494de20e612a81d8feeaf7c2a75caef5', 46);
-insert into Credential (username, password, id_h) values ('5th', 'bb8ddfd492e07465e23da5bcc7fcd5404198540fb0f4c0b654a1c6551813c328', 47);
-insert into Credential (username, password, id_h) values ('Maywood', '9e4227bfc4a36782db2cc0087aa4378ff6b91fdd40c254278ea75a3f7080206e', 48);
-insert into Credential (username, password, id_h) values ('Jenifer', 'fb99e66551817ae48721acbe084adc31fa7005df2d64b0ecd391741b1feae6c8', 49);
-insert into Credential (username, password, id_h) values ('Homewood', '82d4ebd8c6999f4dade440afbb735e3fde58e733a8fb75786341fa436a3c8154', 50);
+insert into Credential (username, password, email, id_h) values ('elita', 'd2ddad42d2d226963df0e3941739ea552ae013deba2b99ee058c0f57a2a84826', 'info@sc-celje.si', 1);
+insert into Credential (username, password, email, id_h) values ('dev', 'ef260e9aa3c673af240d17a2660480361a8e081d1ffeca2a5ed0e3219fc18567', 'info@sc-celje.si', 2);
+insert into Credential (username, password, email, id_h) values ('Ilene', '38da1b2495cded38599a8f963ebbab9c54ac5e35d495036e7b99216f5a19ae9b', 'lorcas2@ihg.com', 3);
+insert into Credential (username, password, email, id_h) values ('International', '88c3adb50ee2869e9573b38e90e0db42e4e9481e655b1ae4db059ae584f5632e', 'agrimmert3@sitemeter.com', 4);
+insert into Credential (username, password, email, id_h) values ('Forest Run', '80ce310863d289f67c0ccb3717a50b5258490243d73fa51ff8d834629fa63b1c', 'nelletson4@fda.gov', 5);
+insert into Credential (username, password, email, id_h) values ('Thompson', 'f535dc2a247523c93badc262ac39ddffd8665143e08887ee07cc5d2edc078134', 'hburgin5@ted.com', 6);
+insert into Credential (username, password, email, id_h) values ('Spaight', '8bdb29f7fdbedec7fca9d76bc40c97f59defc41873a9733941895ca535b0449b', 'ljelf6@ucoz.com', 7);
+insert into Credential (username, password, email, id_h) values ('Talisman', '636b43f4f7effc1de370224a463f1488ce9492c2a8428164c9bfae23034e1746', 'mlebang7@smh.com.au', 8);
+insert into Credential (username, password, email, id_h) values ('Kedzie', '0b2dc0c3d5a00be4835f7d491f6d4099eb461e67c269b454c1d18cf65ec30e63', 'cmayman8@ifeng.com', 9);
+insert into Credential (username, password, email, id_h) values ('Arizona', 'dc4627ca1395ae0188b710ee169092bef96109314c2e3ff6229e49d6051d7b8b', 'ahalegarth9@umn.edu', 10);
+insert into Credential (username, password, email, id_h) values ('Mosinee', '186dc6ea19941fce8f4d3065c7ab0ed8a9cda6b559a3e5e61b846278d86e1a13', 'cemlyna@domainmarket.com', 11);
+insert into Credential (username, password, email, id_h) values ('Hansons', '04cbaedc34d760995c1a09904e944078e22422ad1df4076dabcd192c5bd10416', 'lkoppsb@hubpages.com', 12);
+insert into Credential (username, password, email, id_h) values ('Toban', 'bf8efc385552ef20538f70857ae65ea9f6f615e0dd0865efbada65db9f67f1a2', 'zferebeec@jiathis.com', 13);
+insert into Credential (username, password, email, id_h) values ('Fuller', 'a01030420b5cdbc4211f9f095d5296907343664622eb657a7b453138e8cd4885', 'rscrippsd@tinypic.com', 14);
+insert into Credential (username, password, email, id_h) values ('Atwood', '4cdad4a4473b21c9d039d392b372fb93f582b25da7e4e38eddfb72e0a7f3ad41', 'rempsone@google.nl', 15);
+insert into Credential (username, password, email, id_h) values ('Corben', 'ac0934f7ad6b69fbfd02b7aea88b5df0f3ba1ed75aa7cc31267b472cc4c69ffe', 'dsawkinsf@wufoo.com', 16);
+insert into Credential (username, password, email, id_h) values ('Milwaukee', '778097172b4e40e35bffe2b88b74659cc70685b9ef3a9181d75c527fa80e2927', 'novidg@utexas.edu', 17);
+insert into Credential (username, password, email, id_h) values ('Di Loreto', 'e9a19f58a46691156ff673a36f92d0aa3f0a2eb5db7c2346694ea8a96d8bbd64', 'hroskillyh@free.fr', 18);
+insert into Credential (username, password, email, id_h) values ('Hauk', '4502790095b610bf4ea7652253976270565d88bd2d47b29456f55f60260ac703', 'bgawni@miitbeian.gov.cn', 19);
+insert into Credential (username, password, email, id_h) values ('Tony', 'efdc972d4ca1e0b24db31991bb2aab93ebb0efb041fca8354cd4f778014da89b', 'tcrabbej@redcross.org', 20);
+insert into Credential (username, password, email, id_h) values ('Scofield', '7ff16c78cd886f0e3070ea3ba0daa628b10d02166a5fd0ac4993e7442dabfd70', 'kimmerk@tinyurl.com', 21);
+insert into Credential (username, password, email, id_h) values ('Westridge', '5e96bc533839000aae43979544de5252d9c54a74d3d964db567feced5a0bbe67', 'ahaysoml@nih.gov', 22);
+insert into Credential (username, password, email, id_h) values ('Eliot', '873603345fcc12f1f75bee66f873fefaae2b52f1d5a1ca156e1844511203ccbb', 'rpeppinm@photobucket.com', 23);
+insert into Credential (username, password, email, id_h) values ('Northview', '1d9e997d9da05260250e63d66a3153de9d5d100e3cd71b3080ab2bac470bca54', 'gbranen@cornell.edu', 24);
+insert into Credential (username, password, email, id_h) values ('Drewry', '7ff752376792aec1e5bf4c06886a1134b9b30fe22cfab3c369ff124b0ead9dad', 'sscrymgeouro@fastcompany.com', 25);
+insert into Credential (username, password, email, id_h) values ('Summit', '5e92c04c7426342d269d2876864cad6d6d66e5259bd793e759453d84e35c1e53', 'lcockaymep@dailymotion.com', 26);
+insert into Credential (username, password, email, id_h) values ('Stephen', 'da8c0420475c045572adb6c6cbabf2a524394cf5599522ad2ebbccd085d68768', 'fklimentyevq@barnesandnoble.com', 27);
+insert into Credential (username, password, email, id_h) values ('Stang', '7280cf7b24218d6740c77a9250ac4bcfc7fad313e46f3192bc55a4990b0674be', 'cpilkintonr@weather.com', 28);
+insert into Credential (username, password, email, id_h) values ('Sheridan', 'dd3c64ec5afe6cf27a40c7de987c0c77c5ec1bafa5debf68d81b5fe56e869f47', 'bwilbores@si.edu', 29);
+insert into Credential (username, password, email, id_h) values ('Colorado', '2455c9855718f296c39145679857f15470e9a2836762c30ee017259c29c7be91', 'msalzbergert@senate.gov', 30);
+insert into Credential (username, password, email, id_h) values ('Kings', '4eaa1b42a1619f2fbf0172242d7fd37efd3d491111b3feec0e599201871aa289', 'lfruddu@sina.com.cn', 31);
+insert into Credential (username, password, email, id_h) values ('Turnwooder', 'd24487940fd3e5eae983cb42259022a04203e3eebaa5fb9b2419509ab3abd071', 'cprysv@oakley.com', 32);
+insert into Credential (username, password, email, id_h) values ('Huxley', 'a3b73ca45c413d88aa63f566ed7bd67d1ccfecb98f4f1108f2d31f1bc39e7047', 'ejenkinsw@ucoz.ru', 33);
+insert into Credential (username, password, email, id_h) values ('Pennsylvania', '0c246a7c30d226c448d6dd9fecc94232a4a248fa293438a74215621d3e9a0019', 'krhymesx@narod.ru', 34);
+insert into Credential (username, password, email, id_h) values ('Halfbear', '4039c8c8e47cacdf8567c37dab70bdd99a6827c20ece44056301649e76dbfd1f', 'lcassiny@ovh.net', 35);
+insert into Credential (username, password, email, id_h) values ('Loftsgordon', '291093606739a47473a6abcbd501a21fd0e4d9b261d97e75960e7c9ad402516c', 'blowensohnz@mac.com', 36);
+insert into Credential (username, password, email, id_h) values ('Delaware', 'c0f9722efc79917ef7ac4aea34ce1c4c8b5793f1461e9c61bf128b1b6ecda113', 'tmaine10@chicagotribune.com', 37);
+insert into Credential (username, password, email, id_h) values ('Moose', 'f36bad0b52a59f670ba1fb19c0ad838c8c23eeed7b9c5648809fcdaf20e1bb42', 'cdaudray11@nasa.gov', 38);
+insert into Credential (username, password, email, id_h) values ('Mayfield', '0ace075c8b3cbe4ec328ce6c88a32a34f86e9c580da86123d5f667a638dc94a7', 'branyelld12@java.com', 39);
+insert into Credential (username, password, email, id_h) values ('Pierstorff', '27ef6c847101a2f0ca4e51b5dade8977a8d6b6b33a4993350b44a7e356584f53', 'fgilcrist13@reference.com', 40);
+insert into Credential (username, password, email, id_h) values ('Texas', '0b1b6a06027cfc43acda52c10c6ad9eddd71b3ccf36821c791fde9b35ae5d9d5', 'gosinin14@about.me', 41);
+insert into Credential (username, password, email, id_h) values ('Meadow Ridge', '3e5435d44c98052744d09ba18e94073c0aa15ddb1933a3c112b6a53647add222', 'nfansy15@altervista.org', 42);
+insert into Credential (username, password, email, id_h) values ('Laurel', '2f8f1e36938c3ed09852866171af68ee119fed8f4c012ad0982ded22a5f484b6', 'hiacopini16@phpbb.com', 43);
+insert into Credential (username, password, email, id_h) values ('Goodland', 'a4e8ae30ec9330d8501b712b9fb67e23b571818265304c1b6351aeecf5502248', 'pvasiltsov17@cisco.com', 44);
+insert into Credential (username, password, email, id_h) values ('Johnson', 'b8f4f2b7dbb8f0743b414cf8ab4a2cc79409e0dc7d6995fb941f021fa08e1e89', 'peste18@booking.com', 45);
+insert into Credential (username, password, email, id_h) values ('Larry', '170d461584ac5038b50371fb89271fe78a92b1ed156bfd8f614cb1731c4e84be', 'gbrigstock19@home.pl', 46);
+insert into Credential (username, password, email, id_h) values ('Bayside', '65c337501e6a51c6663c29988681a32cd863369254e2c7328817950f31bedb8e', 'icastana1a@nasa.gov', 47);
+insert into Credential (username, password, email, id_h) values ('Hazelcrest', 'ba0e65e867e78999ca001de715a5875e67fa7e18c92da9c7ec80f67c9a9fcd97', 'krama1b@ustream.tv', 48);
+insert into Credential (username, password, email, id_h) values ('Gateway', '333e92ec7e1fd916406a763eda574ef75451df3983fdc41b4156c95e09d4bf1c', 'jcowndley1c@technorati.com', 49);
+
 
 
 insert into Classroom (room_number) values ('A01');
@@ -423,7 +415,8 @@ insert into Teacher (name, surname, email, gender) values ('Gustie', 'Saladin', 
 insert into Teacher (name, surname, email, gender) values ('Erroll', 'Sainsberry', 'esainsberry2q@devhub.com', 'M');
 insert into Teacher (name, surname, email, gender) values ('Suzanna', 'Scotchmoor', 'sscotchmoor2r@businessweek.com', 'F');
 
-
-
-
+insert into Lesson (id_t, id_s, id_cr, id_h) values (1, 1, 1, 1);
+insert into Lesson (id_t, id_s, id_cr, id_h) values (2, 2, 2, 2);
+insert into Lesson (id_t, id_s, id_cr, id_h) values (3, 3, 3, 3);
+insert into Lesson (id_t, id_s, id_cr, id_h) values (4, 4, 4, 4);
 
