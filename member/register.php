@@ -14,7 +14,7 @@
       <h1 id="body_title">Registracija</h1>
       <form id="register">
         <p id="instruction">Za ustvarjanje novega računa izpolnite spodnji obrazec.</p>
-        <input type="text" id="username" name="username" placeholder="Uporabniško ime" pattern="|[a-zA-Z0-9_-]{8,30}" title="Vnesite uporabniško ime, ki vsebuje najmanj 8 znakov. Vsebuje lahko male in velike črke, številke in vezaj ter podčrtaj."required><br>
+        <input type="text" id="username" name="username" placeholder="Uporabniško ime" pattern="|[a-zA-Z0-9_-]{8,30}" title="Vnesite uporabniško ime, ki vsebuje najmanj 8 znakov. Vsebuje lahko male in velike črke, številke in vezaj ter podčrtaj."><br>
         <input type="text" id="email" name="email" placeholder="E-poštni naslov" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$|" title="Vnesite veljaven e-poštni naslov, saj boste nanj dobili potrditveno e-pošto."required><br>
         <input type="password" id="password" name="password" placeholder="Geslo" pattern=".{8,}" required><br>
         <input type="password" id="password2" name="password2" placeholder="Ponovno vpišite geslo" pattern=".{8,}" required><br>
