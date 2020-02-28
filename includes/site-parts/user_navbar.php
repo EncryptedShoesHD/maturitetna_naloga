@@ -11,7 +11,7 @@ echo "<div id='navbar'>
           <a class='nav_link' href='./grades.php'>Ocene</a>
           <a class='nav_link' href='./examinations.php'>Preverjanja znanja</a>
           <a class='nav_link' href='./reminders.php'>Opomniki</a>
-          <a class='nav_link' href='./profile.php'>Profil</a>
+          <a class='nav_link' href='" . $rootFolder . "member/sign_out.php'>Odjava</a>
         </div>
       </div>";
 
