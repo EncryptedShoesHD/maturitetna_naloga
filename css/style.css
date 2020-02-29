@@ -120,7 +120,7 @@ button, input[type='submit'] {
 }
 
 button {
-  padding: 15px 10%;
+  padding: 15px 20px;
 }
 
 button:hover, input[type='submit']:hover {
@@ -266,6 +266,36 @@ form>input[type='submit'] {
   margin: 30px 0 30px 2.5%;
 }
 
+#upcoming_events_widget>table {
+  width: 100%;
+  text-align: left;
+  margin: 10px 0 10px 0;
+}
+
+#upcoming_events_widget>table>tbody>tr>th {
+  text-align: center;
+}
+
+#upcoming_events_widget>table>tbody>tr>th>span {
+  padding-bottom: 5px;
+  display: block;
+}
+
+#upcoming_events_widget>table>tbody>tr>th>div {
+  font-weight: normal;
+  border-top: dashed 1px #c2c2c2;
+  padding-top: 5px;
+}
+
+#upcoming_events_widget>table>tbody>tr>th, #upcoming_events_widget>table>tbody>tr>td {
+  padding: 10px 10px 10px 10px;
+  border: solid 1px #c2c2c2;
+}
+
+.center {
+  text-align: center !important;
+}
+
 .upcoming_events_section {
   border-bottom: solid 1px #e2e2e2;
   padding-top: 20px;
@@ -303,6 +333,10 @@ form>input[type='submit'] {
   padding-bottom: 15px;
 }
 
+.predmet {
+  line-height: 20px;
+}
+
 .user_info:last-of-type {
   border-bottom: solid 1px #e2e2e2;
 }
@@ -323,4 +357,63 @@ form>input[type='submit'] {
 
 #profile_action>button>img {
   margin-right: 7px;
+}
+
+.subject_classroom {
+  display: block;
+}
+
+.subject_classroom>span {
+  float: right;
+}
+
+.oral_grade {
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.written_grade {
+  color: #b30000;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.product_grade {
+  color: #248f24;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.reminder {
+  width: 100%;
+  border: solid 1.5px #4744ff;
+  margin: 10px 0;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+.reminder_title {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 18px;
+  width: calc(100%-10px);
+  color: #333333;
+  display: block;
+  margin: 0 10px 10px 10px;
+}
+
+.reminder_title>img {
+  float: right;
+}
+
+.reminder_data {
+  width: calc(100%-20px);
+  padding: 5px 10px;
+}
+
+.reminder_data_type {
+  margin: 10px 10px 10px 0;
+  color: #4f4f4f;
+  font-weight: bold;
 }
