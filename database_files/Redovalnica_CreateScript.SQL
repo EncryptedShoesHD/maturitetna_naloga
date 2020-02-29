@@ -1,6 +1,6 @@
 ﻿/*
 Created: 2/27/2020
-Modified: 2/27/2020
+Modified: 2/29/2020
 Model: MySQL 8.0
 Database: MySQL 8.0
 */
@@ -16,8 +16,9 @@ CREATE TABLE `User`
   `RoleID` Int,
   `Name` Varchar(30) NOT NULL,
   `Surname` Varchar(30) NOT NULL,
-  `Active` Bool NOT NULL DEFAULT 1,
   `CreatedOn` Datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `LastSeen` Datetime,
+  `Active` Bool NOT NULL DEFAULT 1,
   PRIMARY KEY (`UserID`)
 )
 ;
@@ -116,6 +117,7 @@ CREATE TABLE `Grades`
   `Grade` Tinyint NOT NULL,
   `Type` Enum('ustno', 'pisno', 'izdelek') NOT NULL,
   `DateReceived` Datetime DEFAULT CURRENT_TIMESTAMP,
+  `Active` Bool NOT NULL DEFAULT 1,
   PRIMARY KEY (`GradeID`)
 )
 ;
@@ -135,6 +137,7 @@ CREATE TABLE `Examinations`
   `UserID` Int,
   `Type` Enum('ustno', 'pisno') NOT NULL,
   `Date` Datetime NOT NULL,
+  `Active` Bool NOT NULL DEFAULT 1,
   PRIMARY KEY (`ExaminationID`)
 )
 ;
@@ -150,6 +153,7 @@ CREATE INDEX `IX_Relationship10` ON `Examinations` (`SubjectID`)
 CREATE TABLE `Reminders`
 (
   `ReminderID` Int NOT NULL AUTO_INCREMENT,
+  `Title` Varchar(30) NOT NULL,
   `Content` Text NOT NULL,
   `CreatedOn` Char(20) DEFAULT CURRENT_TIMESTAMP,
   `RemindSecondsBefore` Int DEFAULT 86400,
@@ -160,6 +164,18 @@ CREATE TABLE `Reminders`
 ;
 
 CREATE INDEX `IX_Relationship11` ON `Reminders` (`UserID`)
+;
+
+-- Table UnfollowedSubjects
+
+CREATE TABLE `UnfollowedSubjects`
+(
+  `SubjectID` Int NOT NULL,
+  `UserID` Int NOT NULL
+)
+;
+
+ALTER TABLE `UnfollowedSubjects` ADD PRIMARY KEY (`SubjectID`, `UserID`)
 ;
 
 -- Create foreign keys (relationships) section -------------------------------------------------
@@ -195,6 +211,12 @@ ALTER TABLE `Examinations` ADD CONSTRAINT `Examination_at` FOREIGN KEY (`Subject
 ;
 
 ALTER TABLE `Reminders` ADD CONSTRAINT `Has_reminders` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+;
+
+ALTER TABLE `UnfollowedSubjects` ADD CONSTRAINT `Subject_unfollowed` FOREIGN KEY (`SubjectID`) REFERENCES `Subjects` (`SubjectID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+;
+
+ALTER TABLE `UnfollowedSubjects` ADD CONSTRAINT `User_unfollowed` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
 
