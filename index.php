@@ -19,26 +19,3 @@
     <?php include($rootFolder . 'includes/site-parts/footer.php') ?>
   </body>
 </html>
-
-<?php
-/*include('includes/database.php');
-
-$database = new Database("redovalnica");
-$database->connect();
-$database->select(
-  array(
-    "person_id" => "pid",
-    'name'),
-  'People',
-  array(
-    "inner" => array(
-      "Employed" => "People.person_id = Employed.person_id",
-      "Employer" => "Employed.person_id = Employer.employer_id"
-    )
-  ),
-  "name LIKE 'a%'"
-);
-echo '<br>';
-$database->disconnect();*/
-
-?>

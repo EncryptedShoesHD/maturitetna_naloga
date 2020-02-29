@@ -1,105 +1,65 @@
 <?php
-
-class Database {
-  private $servername = "localhost";
-  private $username = "root";
-  private $password = "";
-  private $dbname;
-
-  private $conn;
-
-  function __construct($dbname) {
-    $this->dbname = $dbname;
-  }
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $dbname = "redovalnica";
 
   // Create connection
-  function connect() {
-    $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+  $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
-    if ($this->conn->connect_error) {
-        die("Connection failed: " . $this->conn->connect_error);
-    }
-    echo "Connected successfully.<br>";
-    return $this->conn;
+  // Check connection
+  if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
   }
 
-  // Close connection
-  function disconnect() {
-    if($this->conn->ping()) {
-      if($this->conn->close()) {
-        echo 'Connection closed.<br>';
-      }else echo 'Something went wrong while closing the database connection.<br>';
-    }
+  function userExists($conn, $emailAddressOrUsername) {
+    $sql = "SELECT c.CredentialsID FROM Credentials c JOIN User u ON c.CredentialsID = u.CredentialsID WHERE (c.Email = '$emailAddressOrUsername' OR c.Username = '$emailAddressOrUsername') AND u.Active = 1";
+    $result = $conn->query($sql);
+    if($result->num_rows > 0) return true;
+    else return false;
   }
 
-  /*
-    $dataToSelect:
-
-    This array variable is used to specify what table columns have to be selected using a query.
-    In case of ambiguous column names, make sure to specify the name of the table in front of the column name, like this:
-
-    array(
-      "tableName.coloumnName"
-    )
-
-    If you would like to use the AS keyword, you can achieve it by doing that:
-
-    array(
-      "columnName" => "customColumnName"
-    )
-
-
-    $tableName:
-
-    This variable is used to store the table name from which we are going to select the specified columns.
-
-
-    $joins
-
-    This array variable is used to specify table joins. You have to use key => value type of arrays!
-
-    array(
-      "inner" => array("TableToJoin" => "Table1.Column1 = Table2.Column2", "OtherTableToJoin" => "Table3.Column3 = Table4.Column4"),
-      "right" => array(), // Optional, if you don't want or need other joins than inner ones.
-    )
-
-    Key must always match the type of join you would like to create. It is not required to use all types of joins.
-  */
-  function select($dataToSelect, $tableName, $joins, $where) {
-    if(!$this->conn->ping()) {
-      connect();
-    }
-
-    $query = "SELECT ";
-
-    foreach($dataToSelect as $i => $value) {
-      if($i == null) $query = $query . $dataToSelect[$i] . ", ";
-      else $query = $query . $i . " as $dataToSelect[$i], ";
-    }
-
-    $query = substr($query, 0, -2) . " FROM $tableName ";
-
-    if($joins != null) {
-      foreach($joins as $i => $value) {
-        $i = strtolower($i);
-        switch($i) {
-          case "inner":
-          case "left":
-          case "right":
-          case "full":
-            $joinArray = $joins[$i];
-            foreach($joinArray as $j => $value) {
-              $query = $query . strtoupper($i) . " JOIN $j ON $joinArray[$j] ";
-            }
-        }
-      }
-    }
-
-    $query = $query . "WHERE " . $where;
-
-    echo $query;
+  function passwordsMatch($conn, $emailAddressOrUsername, $password) {
+    $sql = "SELECT c.* FROM Credentials c JOIN User u ON c.CredentialsID = u.CredentialsID WHERE (c.Email = '$emailAddressOrUsername' OR c.Username = '$emailAddressOrUsername') AND u.Active = 1 AND c.Password = '" . hash("sha256", $password) . "'";
+    $result = $conn->query($sql);
+    if($result->num_rows > 0) return true;
+    else return false;
   }
-}
+
+  function getUserID($conn, $emailAddressOrUsername) {
+    $sql = "SELECT u.UserID FROM Credentials c JOIN User u ON c.CredentialsID = u.CredentialsID WHERE (c.Email = '$emailAddressOrUsername' OR c.Username = '$emailAddressOrUsername') AND u.Active = 1";
+    $result = $conn->query($sql);
+    if($result->num_rows > 0) {
+      $row = mysqli_fetch_assoc($result);
+      return $row['UserID'];
+    }return null;
+  }
+
+  function updateLastSeen($conn, $userID) {
+    $dt = new DateTime("@" . $_COOKIE['lastSeen']);
+    $sql = "UPDATE User u SET u.LastSeen = '" . $dt->format('Y-m-d H:i:s') . "' WHERE u.UserID = '$userID'";
+    $conn->query($sql);
+  }
+
+  function storeUserData_Cookies($userID) {
+    setcookie("lastSeen", time(), time() + (86400 * 30), "/");
+    $_SESSION['UserID'] = $userID;
+  }
+
+  function logout($conn) {
+    $userID = $_SESSION['UserID'];
+    updateLastSeen($conn, $userID);
+    session_unset();
+    session_destroy();
+  }
+
+  function removeAccount($conn) {
+    $userID = $_SESSION['UserID'];
+    updateLastSeen($conn, $userID);
+    $sql = "UPDATE User u SET u.Active = '0' WHERE u.UserID = '$userID'";
+    $conn->query($sql);
+    session_unset();
+    session_destroy();
+  }
 
 ?>

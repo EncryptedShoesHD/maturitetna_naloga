@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `Credentials`
   `Email` Varchar(255) NOT NULL,
   `Username` Varchar(30),
   `Password` Varchar(64) NOT NULL,
+  `Salt` Varchar(20) NOT NULL,
   PRIMARY KEY (`CredentialsID`)
 );
 

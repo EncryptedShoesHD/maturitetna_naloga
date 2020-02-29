@@ -36,13 +36,11 @@
         </div>
         <div id="profile_action">
           <button>
-            <img src="' . $rootFolder . 'images/signout.png" width="24px" align="left">
-            Odjava
+            <a class="button_a" href="' . $rootFolder . 'member/sign_out.php"><img src="' . $rootFolder . 'images/signout.png" width="24px" align="left">Odjava</a>
           </button>
           <br>
           <button>
-            <img src="' . $rootFolder . 'images/remove_acc.png" width="24px" align="left">
-            Izbriši račun
+            <a class="button_a" href="' . $rootFolder . 'member/remove_account.php"><img src="' . $rootFolder . 'images/remove_acc.png" width="24px" align="left">Izbriši račun</a>
           </button>
         </div>
       </div>';
