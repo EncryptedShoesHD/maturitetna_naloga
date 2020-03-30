@@ -47,7 +47,9 @@
   }
 
   function updateLastSeen($conn, $userID) {
-    $dt = new DateTime("@" . $_COOKIE['lastSeen']);
+    setcookie("lastSeen", time(), time() + (86400 * 30), "/");
+    if(isset($_COOKIE['lastSeen']))$dt = new DateTime("@" . $_COOKIE['lastSeen']);
+    else $dt = new DateTime();
     $sql = "UPDATE User u SET u.LastSeen = '" . $dt->format('Y-m-d H:i:s') . "' WHERE u.UserID = '$userID'";
     $conn->query($sql);
   }
