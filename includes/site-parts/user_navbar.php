@@ -6,11 +6,11 @@ echo "<div id='navbar'>
           <span id='brand_name' href='$rootFolder'>Osebna redovalnica</span>
         </a>
         <div id='nav_links'>
-          <a class='nav_link' href='./'>Domov</a>
-          <a class='nav_link' href='./schedule.php'>Urnik</a>
-          <a class='nav_link' href='./grades.php'>Ocene</a>
-          <a class='nav_link' href='./examinations.php'>Preverjanja znanja</a>
-          <a class='nav_link' href='./reminders.php'>Opomniki</a>
+          <a class='nav_link' href='" . $rootFolder . "redovalnica'>Domov</a>
+          <a class='nav_link' href='" . $rootFolder . "redovalnica/schedule.php'>Urnik</a>
+          <a class='nav_link' href='" . $rootFolder . "redovalnica/grades.php'>Ocene</a>
+          <a class='nav_link' href='" . $rootFolder . "redovalnica/examinations.php'>Preverjanja znanja</a>
+          <a class='nav_link' href='" . $rootFolder . "redovalnica/reminders.php'>Opomniki</a>
           <a class='nav_link' href='" . $rootFolder . "member/sign_out.php'>Odjava</a>
         </div>
       </div>";

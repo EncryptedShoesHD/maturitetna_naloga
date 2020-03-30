@@ -1,5 +1,10 @@
 <?php
   $rootFolder = "../";
+  include($rootFolder . "includes/database.php");
+  session_start();
+  if(!isset($_SESSION['UserID'])) {
+    header('Location: ' . $rootFolder . 'member/login.php');
+  }
 ?>
 
 <html>

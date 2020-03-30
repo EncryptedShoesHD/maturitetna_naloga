@@ -5,7 +5,7 @@
     header('Location: ' . $rootFolder . 'redovalnica/');
   }
 ?>
-
+<!-- redadmin, Redadmin9 -->
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href=<?php echo $rootFolder . "css/style.css"; ?>>
@@ -24,7 +24,7 @@
             if(userExists($conn, $_POST['username'])) {
               if(passwordsMatch($conn, $_POST['username'], $_POST['password'])) {
                 $userID = getUserID($conn, $_POST['username']);
-                storeUserData_Cookies($userID);
+                storeUserData_Cookies($userID, $_POST['username']);
                 updateLastSeen($conn, $userID);
                 header('Location: ' . $rootFolder . 'redovalnica/');
               } else {

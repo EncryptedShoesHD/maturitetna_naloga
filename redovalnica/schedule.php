@@ -1,5 +1,10 @@
 <?php
   $rootFolder = "../";
+  include($rootFolder . "includes/database.php");
+  session_start();
+  if(!isset($_SESSION['UserID'])) {
+    header('Location: ' . $rootFolder . 'member/login.php');
+  }
 ?>
 
 <html>
@@ -14,6 +19,7 @@
       <div class="flexible_content">
         <?php include($rootFolder . 'includes/site-parts/profile_widget.php'); ?>
         <div id="upcoming_events_widget">
+          <p id="instruction">Celico lahko spremenite tako, da nanjo dvakrat kliknete.</p>
           <table>
             <tr>
               <th>/</th>

@@ -1,5 +1,9 @@
 <?php
   $rootFolder = "../";
+  session_start();
+  if(!isset($_SESSION['UserID'])) {
+    header('Location: ' . $rootFolder . 'member/login.php');
+  }
 ?>
 
 <html>

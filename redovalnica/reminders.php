@@ -1,5 +1,10 @@
 <?php
   $rootFolder = "../";
+  include($rootFolder . "includes/database.php");
+  session_start();
+  if(!isset($_SESSION['UserID'])) {
+    header('Location: ' . $rootFolder . 'member/login.php');
+  }
 ?>
 
 <html>
@@ -14,6 +19,11 @@
       <div class="flexible_content">
         <?php include($rootFolder . 'includes/site-parts/profile_widget.php'); ?>
         <div id="upcoming_events_widget">
+
+          <? php
+            
+          ?>
+
           <div class="reminder">
             <span class="reminder_title">Reminder 1
               <img src=<?php echo $rootFolder . "images/remove.png"; ?> width="18px" style="cursor: pointer;">

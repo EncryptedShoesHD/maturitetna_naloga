@@ -1,6 +1,7 @@
 <?php
   // Fixed variables
   $rootFolder = "./";
+  session_start();
 ?>
 
 <html>

@@ -3,7 +3,7 @@ body {
   font-family: 'Lato';
 }
 
-a:not(.button_a) {
+a:not(.button_a):not(.text_hyperlink) {
   color: black;
   text-decoration: none;
   padding: 10px 5px;
@@ -160,7 +160,7 @@ h4, .subsection_title {
   color: #4744ff;
 }
 
-form[id='login'], form[id="register"], form[id="resetpass"], form[id="contact"] {
+form[id='login'], form[id="register"], form[id="resetpass"], form[id="contact"], form[id="remove_account"] {
   width: 30%;
   margin-left: calc(35%);
   border: solid 1px #e2e2e2;
@@ -170,6 +170,18 @@ form[id='login'], form[id="register"], form[id="resetpass"], form[id="contact"] 
   border-bottom: none;
   margin-bottom: 0;
   box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.5);
+}
+
+form[id="insertion"] {
+  width: 50%;
+  margin-left: 25%;
+  text-align: left;
+}
+
+form[id="grade_edit"] {
+  width: 30%;
+  margin-left: 35%;
+  text-align: left;
 }
 
 #error {
@@ -190,7 +202,7 @@ form>label {
   padding: 5px 0;
 }
 
-form>input:not([type='submit']), form>textarea {
+form>input:not([type='submit']), form>textarea, form>input:not([type='checkbox']) {
   width: 90%;
   margin: 8px 5% 14px 5%;
   border: solid 1px #d9d9d9;
@@ -198,6 +210,17 @@ form>input:not([type='submit']), form>textarea {
   min-width: 90%;
   max-width: 90%;
   min-height: 37px;
+}
+
+form>input[type='checkbox'] {
+  max-height: 20px;
+  min-height: 20px;
+  min-width: 10%;
+  max-width: 10%;
+  line-height: 20px;
+  padding: 0 15px;
+  vertical-align: top;
+  margin: 0 0 15px 0;
 }
 
 form>input:not([type='submit']):focus {
@@ -244,10 +267,6 @@ form>input[type='submit'] {
   font-weight: bold;
 }
 
-.flexible_content {
-  display: flex;
-}
-
 #profile_widget, #upcoming_events_widget {
   display: inline-block;
   box-shadow: 0px 3px 8px 0px rgba(0,0,0,0.5);
@@ -259,9 +278,9 @@ form>input[type='submit'] {
 
 #profile_widget {
   width: 30%;
+  float: left;
   margin: 30px 2.5% 30px 0;
   font-family: 'Roboto', sans-serif;
-  height: 580px;
 }
 
 #profile_widget>#greeting {
@@ -271,8 +290,9 @@ form>input[type='submit'] {
 }
 
 #upcoming_events_widget {
-  width: 65%;
+  width: 60%;
   margin: 30px 0 30px 2.5%;
+  min-height: 600px;
 }
 
 #upcoming_events_widget>table {
@@ -334,6 +354,7 @@ form>input[type='submit'] {
 .text_hyperlink {
   padding: 0;
   color: #4744ff;
+  text-decoration: none;
 }
 
 .user_info {

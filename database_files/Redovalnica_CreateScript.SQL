@@ -17,17 +17,16 @@ CREATE INDEX `IX_Relationship2` ON `User` (`RoleID`);
 
 CREATE TABLE IF NOT EXISTS `Credentials`
 (
-  `CredentialsID` Int NOT NULL AUTO_INCREMENT,
+  `CredentialsID` Int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `Email` Varchar(255) NOT NULL,
   `Username` Varchar(30),
   `Password` Varchar(64) NOT NULL,
-  `Salt` Varchar(20) NOT NULL,
-  PRIMARY KEY (`CredentialsID`)
+  `Salt` Varchar(64) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `Subjects`
 (
-  `SubjectID` Int NOT NULL,
+  `SubjectID` Int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `CreatedBy` Int,
   `Title` Varchar(30) NOT NULL,
   `Shortcode` Char(3) NOT NULL,
@@ -35,8 +34,6 @@ CREATE TABLE IF NOT EXISTS `Subjects`
 );
 
 CREATE INDEX `IX_Relationship3` ON `Subjects` (`CreatedBy`);
-
-ALTER TABLE `Subjects` ADD PRIMARY KEY (`SubjectID`);
 
 CREATE TABLE IF NOT EXISTS `UserRole`
 (
