@@ -5,7 +5,7 @@
     header('Location: ' . $rootFolder . 'redovalnica/');
   }
 ?>
-<!-- redadmin, Redadmin9 -->
+<!-- redovalnica_admin, Admin123 -->
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href=<?php echo $rootFolder . "css/style.css"; ?>>

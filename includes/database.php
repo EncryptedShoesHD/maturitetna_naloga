@@ -80,8 +80,8 @@
     $dt = new DateTime("@" . time());
     $salt = bin2hex(random_bytes(32));
     $query = "INSERT INTO Credentials(Email, Username, Password, Salt) VALUES ('$email', '$username', '" . hash("sha256", $password . $salt) . "', '$salt')";
-    if(mysqli_query($conn, $query)) {
-      $lastID = mysqli_insert_id($conn);
+    if($conn->query($query)) {
+      $lastID = $conn->insert_id;
       $query = "INSERT INTO User(CredentialsID, RoleID, Name, Surname, CreatedOn, Active) VALUES ($lastID, 2, '$name', '$surname', '" . $dt->format('Y-m-d H:i:s') . "', '1')";
       $conn->query($query);
     }

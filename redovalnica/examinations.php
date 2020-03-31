@@ -11,6 +11,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href=<?php echo $rootFolder . "css/style.css"; ?>>
     <link rel="shortcut icon" type="image/png" href=<?php echo $rootFolder . "images/logo.png"; ?>>
+    <script src=<?php echo $rootFolder . "js/script.js"; ?>></script>
     <title>Osebna redovalnica A+</title>
   </head>
   <body>
@@ -138,7 +139,7 @@
                               $toEcho = substr($toEcho, 0, -2) . '<a href="' . $rootFolder . 'redovalnica/examinations.php?mode=edit&action=edit_exams&data=' . $row['SubjectID'] . '"><img src=';
                               $toEcho = $toEcho . $rootFolder . 'images/edit.png width="20px" align="right"></a></td>';
                               echo $toEcho;
-                            }else echo '<td></td>';
+                            }else echo '<td ondblclick="editExaminations(' . $row['SubjectID'] . ')"></td>';
                           }
                       echo '<tr>';
                   }

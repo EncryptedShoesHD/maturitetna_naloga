@@ -240,7 +240,6 @@ form>input:not([type='submit']):invalid {
 
 form>input[type='submit'] {
   width: 40%;
-  margin: 10px 30%;
   padding: 10px;
 }
 

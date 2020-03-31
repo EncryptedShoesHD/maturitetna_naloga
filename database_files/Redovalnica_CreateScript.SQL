@@ -149,3 +149,10 @@ ALTER TABLE `Reminders` ADD CONSTRAINT `Has_reminders` FOREIGN KEY (`UserID`) RE
 ALTER TABLE `UnfollowedSubjects` ADD CONSTRAINT `Subject_unfollowed` FOREIGN KEY (`SubjectID`) REFERENCES `Subjects` (`SubjectID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 ALTER TABLE `UnfollowedSubjects` ADD CONSTRAINT `User_unfollowed` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+
+/* INSERT NECESSARY RECORDS */
+INSERT INTO `UserRole` VALUES (1, 'Admin'), (2, 'User');
+INSERT INTO `Credentials` VALUES (1, 'admin@redovalnica.ga', 'redovalnica_admin', 'b90e058426fa799bfce2c6740fb6ef70b57f08a0dea0198ae83dd5c15989ee8a ', 'c99852cbeb154f25f673e9c4677a119d5c3548fa585b59b34f43f874b9d601ea');
+INSERT INTO `User`(UserID, CredentialsID, RoleID, Name, Surname, Active) VALUES (1, 1, 1, 'Tomaž', 'Bizjak', 1);
