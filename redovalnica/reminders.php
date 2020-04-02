@@ -21,7 +21,7 @@
         <div id="upcoming_events_widget">
 
           <? php
-            
+
           ?>
 
           <div class="reminder">
