@@ -10,7 +10,7 @@ if($_POST){
   if(userExists($conn, $user_name)) {
     if(passwordsMatch($conn, $user_name, $user_pass)) {
       $userID = getUserID($conn, $user_name);
-      storeUserData_Cookies($userID);
+      storeUserData_Cookies($userID, $user_name);
       updateLastSeen($conn, $userID);
       echo "Pozdravljeni, $user_name";
     } else {
