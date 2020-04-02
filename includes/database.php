@@ -1,8 +1,5 @@
 <?php
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "redovalnica";
+  include("conn.php");
 
   // Create connection
   $conn = new mysqli($servername, $username, $password, $dbname);

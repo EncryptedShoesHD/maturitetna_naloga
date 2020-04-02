@@ -1,5 +1,5 @@
 <?php
-require "conn.php";
+include($rootFolder . "conn.php");
 $user_name = $_POST["username"];
 $user_pass = $_POST["password"];
 $user_pass = hash('sha256',$user_pass);
@@ -12,4 +12,4 @@ if(mysqli_num_rows($result)>0){
     $name = $row['username'];
     echo "login successful. Welcome $name";
 }else echo " login failed";
-?>
+?> 
