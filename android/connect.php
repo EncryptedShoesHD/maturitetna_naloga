@@ -1,6 +1,7 @@
 <?php
 session_start();
 $rootFolder = "../";
+include("conn.php");
 include($rootFolder . "includes/database.php");
 $user_name = $_POST['username'];
 $user_pass = $_POST['password'];
