@@ -5,7 +5,7 @@ if(!$conn){
 }
 $response = array();
 
-$sql_query = "SELECT SubjectID,Grade,Type,DateReceived FROM `grades` WHERE Active = 1";
+$sql_query = "SELECT Shortcode,Grade,Type,DateReceived FROM `grades` g join `subjects` s ON g.SubjectID = s.SubjectID WHERE g.Active = 1";
 $result =  mysqli_query($conn,$sql_query);
 
 if(mysqli_num_rows($result) > 0){
