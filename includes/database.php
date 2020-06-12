@@ -1,5 +1,10 @@
 <?php
 
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $dbname = "redovalnica";
+
   // Create connection
   $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -167,6 +172,27 @@
       return $data;
     }
     return null;
+  }
+
+  function updateExaminations($conn, $userID, $subject, $exams) {
+    $subjectData = getSubjectTitleAndExaminations($conn, $userID, $subject);
+    $subjects = $subjectData[array_keys($subjectData)[0]];
+    $i = 1;
+    foreach ($subjects as $key => $value) {
+      $sql = "UPDATE Examinations SET Active = '0' WHERE ExaminationID = '$value[3]'";
+      $conn->query($sql);
+    }
+    foreach ($exams as $exam) {
+      $sql = "UPDATE Examinations SET Active = '1' WHERE ExaminationID = '$exam'";
+      $conn->query($sql);
+    }
+  }
+
+  function createExamination($conn, $userID, $subjectID, $type, $date) {
+    $dt = new DateTime($date);
+    $sql = "INSERT INTO Examinations (SubjectID, UserID, Type, Date, Active)
+            VALUES ('$subjectID', '$userID', '$type', '" . $dt->format('Y-m-d H:i:s') . "', '1')";
+    $conn->query($sql);
   }
 
 ?>

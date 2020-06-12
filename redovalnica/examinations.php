@@ -28,7 +28,27 @@
                 createSubject($conn, $_POST['title'], $_POST['shortcode']);
               if(isset($_POST['existing']) && !(trim($_POST['existing']) === 'null'))
                 followSubject($conn, $_SESSION['UserID'], $_POST['existing']);
+              if(isset($_POST['save_exams'])) {
+                //echo '<pre>'; echo var_dump($_POST); '</pre>';
+                $activate = array();
+
+                for($index = 0; $index < sizeof($_POST) - 1; $index++) {
+                  $key = array_keys($_POST)[$index];
+                  $val = $_POST[$key];
+                  $examID = intval(str_replace("item", "", $key));
+                  array_push($activate, $examID);
+                }
+
+                updateExaminations($conn, $_SESSION['UserID'], intval($_POST['sid']), $activate);
+              } else if(isset($_POST['add_exam'])) {
+                header('Location: ' . $rootFolder . 'redovalnica/examinations.php?mode=edit&action=add_exam&data=' . $_POST['add_exam']);
+              }else if(isset($_POST['save_new_exam'])) {
+                createExamination($conn, $_SESSION['UserID'], $_POST['sid'], $_POST['tip'], $_POST['datum']);
+                header('Location: ' . $rootFolder . 'redovalnica/examinations.php' . $_POST['add_exam']);
+              }
             }
+
+
             if($_GET && isset($_GET['mode']) && $_GET['mode'] === 'edit' && isset($_GET['action'])) {
               if($_GET['action'] === 'add_subject') {
                 echo '<form id="insertion" method="post" action="./examinations.php">
@@ -53,6 +73,8 @@
                   unfollowSubject($conn, $_SESSION['UserID'], $_GET['data']);
                 }
               } else if ($_GET['action'] === 'edit_exams') {
+
+                //Urejanje preverjanj znanja za izbran predmet.
                 if(isset($_GET['data'])) {
                   echo '<form id="grade_edit" method="post" action="./examinations.php">';
 
@@ -63,11 +85,10 @@
                   $subjects = $subjectData[array_keys($subjectData)[0]];
                   $i = 1;
                   foreach ($subjects as $key => $value) {
-                    //echo '<pre>'; var_dump($value); echo '</pre>';
                     if($value[0] === "1")
-                      echo '<input type="checkbox" id="item' . $i . '" name="item1" value="' . $value[2] . ' (' . $value[1]  . ')" checked>';
+                      echo '<input type="checkbox" id="item' . $i . '" name="item' . $value[3] . '" value="' . $value[2] . ' (' . $value[1]  . ')" checked>';
                     else
-                      echo '<input type="checkbox" id="item' . $i . '" name="item1" value="' . $value[2] . ' (' . $value[1]  . ')">';
+                      echo '<input type="checkbox" id="item' . $i . '" name="item' . $value[3] . '" value="' . $value[2] . ' (' . $value[1]  . ')">';
                     $dt = new DateTime($value[2]);
                     echo '<label for="item' . $i . '">' . $dt->format('d.m.Y') . ' (' . $value[1]  . ')
                           <a href="' . $rootFolder . 'redovalnica/examinations.php?mode=edit&action=edit_exam&data=' . $value[3] . '">
@@ -77,7 +98,52 @@
                           <br>';
                     $i++;
                   }
-                  echo '</form>';
+                  echo '<input type="hidden" name="sid" value="' . $_GET['data'] . '">
+                        <div id="profile_action">
+                        <button name="save_exams">
+                          <a class="button_a"><img src="' . $rootFolder . 'images/save.png" width="24px" align="left">Shrani</a>
+                        </button>
+                        <br>
+                        <button name="add_exam" value="' . $_GET['data'] . '">
+                          <a class="button_a"><img src="' . $rootFolder . 'images/add.png" width="24px" align="left">Dodaj</a>
+                        </button></div></form>';
+                }
+              } else if ($_GET['action'] === 'add_exam') {
+                //Ko uporabnik želi dodati novo preverjanje znanja, se mu prikaže spodnji obrazec.
+                if(isset($_GET['data'])) {
+                  echo '<form id="grade_edit" method="post" action="./examinations.php">';
+
+                  $subjectData = getActiveSubjects($conn, $_SESSION['UserID']);
+                  $subjectName = "";
+
+                  while($row = mysqli_fetch_assoc($subjectData)) {
+                    if(intval($row['SubjectID']) === intval($_GET['data']))
+                      $subjectName = $row['Title'];
+                  }
+                  echo
+                  '<p id="instruction" style="width: 90%; margin-left: 5%; text-align: center;"><span style="color: 4744ff;">' . $subjectName . '</span> </p>
+                   <select name="tip" required>
+                      <option value="pisno">Pisno</option>
+                      <option value="ustno">Ustno</option>
+                      <option value="izdelek">Izdelek</option>
+                   </select>
+                   <input type="date" name="datum" required>
+                   <input type="hidden" name="sid" value="' . $_GET['data'] . '">
+                   <div id="profile_action">
+                     <button name="save_new_exam" value="' . $_GET['data'] . '">
+                       <a class="button_a"><img src="' . $rootFolder . 'images/save.png" width="24px" align="left">Shrani</a>
+                     </button>
+                   </div>
+                   </form>';
+                }
+              } else if ($_GET['action'] === 'edit_exam') {
+                echo '<form id="grade_edit" method="post" action="./examinations.php">';
+                $subjectData = getActiveSubjects($conn, $_SESSION['UserID']);
+                $subjectName = "";
+
+                while($row = mysqli_fetch_assoc($subjectData)) {
+                  if(intval($row['SubjectID']) === intval($_GET['data']))
+                    $subjectName = $row['Title'];
                 }
               }
             }

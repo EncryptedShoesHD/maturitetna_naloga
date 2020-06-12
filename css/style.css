@@ -202,7 +202,7 @@ form>label {
   padding: 5px 0;
 }
 
-form>input:not([type='submit']), form>textarea, form>input:not([type='checkbox']) {
+form>input:not([type='submit']), form>textarea, form>input:not([type='checkbox']), select{
   width: 90%;
   margin: 8px 5% 14px 5%;
   border: solid 1px #d9d9d9;
@@ -210,6 +210,10 @@ form>input:not([type='submit']), form>textarea, form>input:not([type='checkbox']
   min-width: 90%;
   max-width: 90%;
   min-height: 37px;
+}
+
+select>option {
+  opacity: 0.9;
 }
 
 form>input[type='checkbox'] {
