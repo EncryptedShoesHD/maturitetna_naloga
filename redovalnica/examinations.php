@@ -105,12 +105,12 @@
                   }
                   echo '<input type="hidden" name="sid" value="' . $_GET['data'] . '">
                         <div id="profile_action">
-                        <button name="save_exams">
-                          <a class="button_a"><img src="' . $rootFolder . 'images/save.png" width="24px" align="left">Shrani</a>
-                        </button>
-                        <br>
                         <button name="add_exam" value="' . $_GET['data'] . '">
                           <a class="button_a"><img src="' . $rootFolder . 'images/add.png" width="24px" align="left">Dodaj</a>
+                        </button>
+                        <br>
+                        <button name="save_exams">
+                          <a class="button_a"><img src="' . $rootFolder . 'images/save.png" width="24px" align="left">Shrani</a>
                         </button></div></form>';
                 }
               } else if ($_GET['action'] === 'add_exam') {
