@@ -1,13 +1,13 @@
 <?php
-$servername = "db";
+/*$servername = "db";
 $username = "root";
 $password = "geslozabazo";
-$dbname = "redovalnicatest";
+$dbname = "redovalnicatest";*/
 
 
-/*$servername = "localhost";
+$servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "redovalnica";*/
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-?>
+$dbname = "redovalnica";
+$conn = new mysqli($servername, $username, $password, $dbname);
+?> 
