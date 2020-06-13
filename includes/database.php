@@ -206,4 +206,45 @@
     $conn->query($sql);
   }
 
+  function getActiveLessons($conn, $userID) {
+    $sql = "SELECT l.LessonID, s.Title as SubjectTitle, s.Shortcode, lec.Name AS LecturerName, lec.Surname as LecturerSurname, l.Start, l.End, l.DayOfWeek, l.Classroom
+            FROM Lesson l
+            JOIN Lecturer lec ON l.LecturerID = lec.LecturerID
+            JOIN Subjects s ON s.SubjectID = l.SubjectID
+            WHERE l.UserID = '$userID'
+            ORDER BY Start ASC, DayOfWeek ASC";
+    return $conn->query($sql);
+  }
+
+  function getLessonByPosition($conn, $dayOfWeek, $start, $end) {
+    $sql = "SELECT l.LessonID, l.SubjectID, s.Title as SubjectTitle, l.LecturerID, lec.Name AS LecturerName, lec.Surname as LecturerSurname, l.Start, l.End, l.DayOfWeek, l.Classroom
+            FROM Lesson l
+            JOIN Lecturer lec ON l.LecturerID = lec.LecturerID
+            JOIN Subjects s ON s.SubjectID = l.SubjectID
+            WHERE l.DayOfWeek = '$dayOfWeek' AND l.Start = '" . $start->format('H:i') . "' AND l.End = '" . $end->format('H:i') . "'";
+    return $conn->query($sql);
+  }
+
+  function getLecturerID($conn, $name, $surname) {
+    $sql = "SELECT LecturerID FROM Lecturer WHERE Name = '$name' AND Surname = '$surname'";
+    return $conn->query($sql);
+  }
+
+  function createLecturer($conn, $name, $surname) {
+    $sql = "INSERT INTO Lecturer (Name, Surname, Email) VALUES ('$name', '$surname', NULL)";
+    $conn->query($sql);
+    return $conn->insert_id;
+  }
+
+  function createLesson($conn, $subjectID, $lecturerID, $userID, $start, $end, $dayOfWeek, $classroom) {
+    $sql = "INSERT INTO Lesson (SubjectID, LecturerID, UserID, Start, End, DayOfWeek, Classroom, Active)
+            VALUES ('$subjectID', '$lecturerID', '$userID', '" . $start->format('H:i') . "', '" . $end->format('H:i') . "', '$dayOfWeek', '$classroom', '1')";
+    $conn->query($sql);
+  }
+
+  function updateLesson($conn, $lessonID, $subjectID, $lectuerID, $classroom) {
+    $sql = "UPDATE Lesson SET SubjectID = '$subjectID', LecturerID = '$lectuerID', Classroom = '$classroom' WHERE LessonID = '$lessonID'";
+    $conn->query($sql);
+  }
+
 ?>
