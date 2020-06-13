@@ -195,4 +195,15 @@
     $conn->query($sql);
   }
 
+  function getExaminationData($conn, $examinationID) {
+    $sql = "SELECT Type, Date, Active FROM Examinations WHERE ExaminationID = '$examinationID'";
+    return $conn->query($sql);
+  }
+
+  function updateExamination($conn, $examID, $type, $date, $active) {
+    $dt = new DateTime($date);
+    $sql = "UPDATE Examinations SET Type = '$type', Date = '" . $dt->format('Y-m-d H:i:s') . "', Active = '$active' WHERE ExaminationID = '$examID'";
+    $conn->query($sql);
+  }
+
 ?>

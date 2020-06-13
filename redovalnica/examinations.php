@@ -42,9 +42,14 @@
                 updateExaminations($conn, $_SESSION['UserID'], intval($_POST['sid']), $activate);
               } else if(isset($_POST['add_exam'])) {
                 header('Location: ' . $rootFolder . 'redovalnica/examinations.php?mode=edit&action=add_exam&data=' . $_POST['add_exam']);
-              }else if(isset($_POST['save_new_exam'])) {
+              } else if(isset($_POST['save_new_exam'])) {
                 createExamination($conn, $_SESSION['UserID'], $_POST['sid'], $_POST['tip'], $_POST['datum']);
                 header('Location: ' . $rootFolder . 'redovalnica/examinations.php' . $_POST['add_exam']);
+              } else if(isset($_POST['save_exam'])) {
+                if(isset($_POST['active']))
+                  updateExamination($conn, $_POST['eid'], $_POST['tip'], $_POST['datum'], 1);
+                else
+                  updateExamination($conn, $_POST['eid'], $_POST['tip'], $_POST['datum'], 0);
               }
             }
 
@@ -91,7 +96,7 @@
                       echo '<input type="checkbox" id="item' . $i . '" name="item' . $value[3] . '" value="' . $value[2] . ' (' . $value[1]  . ')">';
                     $dt = new DateTime($value[2]);
                     echo '<label for="item' . $i . '">' . $dt->format('d.m.Y') . ' (' . $value[1]  . ')
-                          <a href="' . $rootFolder . 'redovalnica/examinations.php?mode=edit&action=edit_exam&data=' . $value[3] . '">
+                          <a href="' . $rootFolder . 'redovalnica/examinations.php?mode=edit&action=edit_exam&data=' . $_GET['data'] . ';' . $value[3] . '">
                             <img src='; ?> <?php echo $rootFolder . "images/edit.png" . ' width="20px" align="right">
                           </a>
                           </label>
@@ -109,6 +114,7 @@
                         </button></div></form>';
                 }
               } else if ($_GET['action'] === 'add_exam') {
+
                 //Ko uporabnik želi dodati novo preverjanje znanja, se mu prikaže spodnji obrazec.
                 if(isset($_GET['data'])) {
                   echo '<form id="grade_edit" method="post" action="./examinations.php">';
@@ -137,14 +143,37 @@
                    </form>';
                 }
               } else if ($_GET['action'] === 'edit_exam') {
+
+                //Urejanje posameznega preverjanja znanja.
                 echo '<form id="grade_edit" method="post" action="./examinations.php">';
                 $subjectData = getActiveSubjects($conn, $_SESSION['UserID']);
                 $subjectName = "";
 
                 while($row = mysqli_fetch_assoc($subjectData)) {
-                  if(intval($row['SubjectID']) === intval($_GET['data']))
+                  if(intval($row['SubjectID']) === intval(explode(';', $_GET['data'])[0]))
                     $subjectName = $row['Title'];
                 }
+
+                $examData = getExaminationData($conn, intval(explode(';', $_GET['data'])[1]));
+                $row = mysqli_fetch_assoc($examData);
+
+                echo
+                ' <p id="instruction" style="width: 90%; margin-left: 5%; text-align: center;"><span style="color: 4744ff;">' . $subjectName . '</span> </p>
+                  <select name="tip">
+                     <option value="pisno" ' . ($row['Type'] === 'pisno' ? 'selected="1"' : '') . '>Pisno</option>
+                     <option value="ustno" ' . ($row['Type'] === 'ustno' ? 'selected="1"' : '') . '>Ustno</option>
+                     <option value="izdelek" ' . ($row['Type'] === 'izdelek' ? 'selected="1"' : '') . '>Izdelek</option>
+                  </select>
+                  <input type="date" name="datum" id="dynamicdate" value="' . date('Y-m-d', strtotime($row['Date'])) . '">
+                  <input type="checkbox" id="veljavnost" name="active" ' . ($row['Active'] === '1' ? 'checked' : '') . ' style="margin-left: 5%;">
+                  <label for="veljavnost">Veljaven?</label>
+                  <input type="hidden" name="eid" value="' . explode(';', $_GET['data'])[1] . '">
+                  <div id="profile_action">
+                    <button name="save_exam" value="' . $_GET['data'] . '">
+                      <a class="button_a"><img src="' . $rootFolder . 'images/save.png" width="24px" align="left">Shrani</a>
+                    </button>
+                  </div>
+                </form>';
               }
             }
 
