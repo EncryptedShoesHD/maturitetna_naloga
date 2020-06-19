@@ -216,12 +216,12 @@
     return $conn->query($sql);
   }
 
-  function getLessonByPosition($conn, $dayOfWeek, $start, $end) {
+  function getLessonByPosition($conn, $dayOfWeek, $start, $end, $userID) {
     $sql = "SELECT l.LessonID, l.SubjectID, s.Title as SubjectTitle, l.LecturerID, lec.Name AS LecturerName, lec.Surname as LecturerSurname, l.Start, l.End, l.DayOfWeek, l.Classroom
             FROM Lesson l
             JOIN Lecturer lec ON l.LecturerID = lec.LecturerID
             JOIN Subjects s ON s.SubjectID = l.SubjectID
-            WHERE l.DayOfWeek = '$dayOfWeek' AND l.Start = '" . $start->format('H:i') . "' AND l.End = '" . $end->format('H:i') . "'";
+            WHERE l.DayOfWeek = '$dayOfWeek' AND l.Start = '" . $start->format('H:i') . "' AND l.End = '" . $end->format('H:i') . "' AND l.UserID = '$userID'";
     return $conn->query($sql);
   }
 
@@ -244,6 +244,11 @@
 
   function updateLesson($conn, $lessonID, $subjectID, $lectuerID, $classroom) {
     $sql = "UPDATE Lesson SET SubjectID = '$subjectID', LecturerID = '$lectuerID', Classroom = '$classroom' WHERE LessonID = '$lessonID'";
+    $conn->query($sql);
+  }
+
+  function removeLesson($conn, $lessonID) {
+    $sql = "DELETE FROM Lesson WHERE LessonID = '$lessonID'";
     $conn->query($sql);
   }
 

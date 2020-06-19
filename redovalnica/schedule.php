@@ -49,6 +49,22 @@
                 }
 
                 header('Location: ' . $rootFolder . 'redovalnica/schedule.php');
+              } else if(isset($_POST['remove_lesson'])) {
+                $dayOfWeek = explode(';', $_POST['remove_lesson'])[0];
+                $startRaw = explode(';', $_POST['remove_lesson'])[1];
+                $endRaw = explode(';', $_POST['remove_lesson'])[2];
+                $startDT = new DateTime();
+                $startDT->setTime(intval(intval($startRaw) / 100), intval(intval($startRaw) % 100));
+                $endDT = new DateTime();
+                $endDT->setTime(intval(intval($endRaw) / 100), intval(intval($endRaw) % 100));
+                $lesson = getLessonByPosition($conn, $dayOfWeek, $startDT, $endDT, $_SESSION['UserID']);
+
+                if($lesson->num_rows > 0) {
+                  $row = mysqli_fetch_assoc($lesson);
+                  removeLesson($conn, $row['LessonID']);
+                }
+
+                header('Location: ' . $rootFolder . 'redovalnica/schedule.php');
               }
             }
 
@@ -69,7 +85,7 @@
                         $endDT->setTime(intval(intval($endRaw) / 100), intval(intval($endRaw) % 100));
 
                         //Check if lesson already exists.
-                        $lesson = getLessonByPosition($conn, $dayOfWeek, $startDT, $endDT);
+                        $lesson = getLessonByPosition($conn, $dayOfWeek, $startDT, $endDT, $_SESSION['UserID']);
 
                         $activeSubjects = getActiveSubjects($conn, $_SESSION['UserID']);
 
@@ -81,7 +97,7 @@
                             <input type="hidden" name="end" value="' . $endRaw . '">';
 
                         if($lesson->num_rows > 0) {
-                          $row = mysqli_fetch_assoc($examData);
+                          $row = mysqli_fetch_assoc($lesson);
 
                           echo
                           '<input type="text" name="lecturer_name" placeholder="Ime predavatelja" value="' . $row['LecturerName'] . '" maxlength="30">
@@ -191,8 +207,8 @@
                   $day++;
                 }
 
-                if($day != 6) {
-                  $cnt = 6 - $day;
+                if($day != 7) {
+                  $cnt = 7 - $day;
                   for($i = 0; $i < $cnt; $i++) {
                     echo '<td ondblclick="editLesson(' . $day . ', ' . intval(str_replace(':', '', $beginning)) . ', ' . intval(str_replace(':', '', $endings[$index])) . ')"></td>';
                     $day++;
@@ -202,13 +218,6 @@
                 echo '</tr>';
                 $index++;
               }
-
-              /*<td ondblclick="editLesson(1, 710, 755)">
-                <span class="subject_classroom">
-                  <b>NUP</b> <span>BE05</span>
-                </span><br>
-                  Lubej Boštjan
-              </td>*/
             } else include($rootFolder . 'includes/site-parts/default_schedule.php');
 
             echo '</table>';
