@@ -285,4 +285,32 @@
     $conn->query($sql);
   }
 
+  function getActiveReminders($conn, $userID) {
+    $sql = "SELECT ReminderID, Title, RemindSecondsBefore, DateUntil FROM Reminders WHERE UserID = '$userID' AND Active = '1'";
+    return $conn->query($sql);
+  }
+
+  function removeReminder($conn, $reminderID) {
+    $sql = "UPDATE Reminders SET Active = '0' WHERE ReminderID = '$reminderID'";
+    $conn->query($sql);
+  }
+
+  function saveReminder($conn, $userID, $title, $date, $time, $remindBefore, $remindBefore_Unit) {
+    $dt = new DateTime($date);
+    $dt->setTime(explode(':', $time)[0], explode(':', $time)[0]);
+    $sql = "INSERT INTO Reminders (Title, CreatedOn, RemindSecondsBefore, DateUntil, UserID, Active)
+            VALUES ('$title', '" . date('Y-m-d H:i:s') . "', '" . convertToSeconds($remindBefore, $remindBefore_Unit) . "', '" . $dt->format('Y-m-d H:i:s') . "', '$userID', '1')";
+    $conn->query($sql);
+  }
+
+  function convertToSeconds($value, $unit) {
+    $value = intval($value);
+    if($unit === 'second') return $value;
+    else if($unit === 'minute') return $value * 60;
+    else if($unit === 'hour') return $value * 3600;
+    else if($unit === 'day') return $value * 86400;
+    else if($unit === 'week') return $value * 604800;
+    else if($unit === 'month') return $value * 2628000;
+  }
+
 ?>

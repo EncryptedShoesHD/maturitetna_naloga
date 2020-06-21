@@ -9,3 +9,11 @@ function editLesson(dayOfWeek, start, end) {
 function editGrade(gradeID) {
   window.location.href = '../redovalnica/grades.php?mode=edit&action=edit_grade&data=' + gradeID;
 }
+
+function removeReminder(reminderID) {
+  window.location.href = '../redovalnica/reminders.php?mode=edit&action=remove&data=' + reminderID;
+}
+
+function addReminder() {
+  window.location.href = '../redovalnica/reminders.php?mode=edit&action=add';
+}
