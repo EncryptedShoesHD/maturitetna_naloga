@@ -26,8 +26,14 @@
             if($_POST) {
               if(isset($_POST['title']) && !(trim($_POST['title']) === '') && isset($_POST['shortcode']) && !(trim($_POST['shortcode']) === ''))
                 createSubject($conn, $_POST['title'], $_POST['shortcode']);
+                if(!empty($_POST['redir'])) {
+                  header('Location: ' . $rootFolder . 'redovalnica/' . $_POST['redir'] . '.php');
+                } else header('Location: ' . $rootFolder . 'redovalnica/examinations.php');
               if(isset($_POST['existing']) && !(trim($_POST['existing']) === 'null'))
                 followSubject($conn, $_SESSION['UserID'], $_POST['existing']);
+                if(!empty($_POST['redir'])) {
+                  header('Location: ' . $rootFolder . 'redovalnica/' . $_POST['redir'] . '.php');
+                } else header('Location: ' . $rootFolder . 'redovalnica/examinations.php');
               if(isset($_POST['save_exams'])) {
                 //echo '<pre>'; echo var_dump($_POST); '</pre>';
                 $activate = array();
@@ -62,20 +68,27 @@
                         <p id="instruction" style="font-size: 15px; width: 90%; margin-left: 5%">Lahko pa izberete enega izmed spodnjih predmetov, ki ste jim v preteklosti nehali slediti: </p>
                         <select name="existing" style="font-size: 15px; width: 90%; margin-left: 5%">
                           <option>Izberi predmet</option>
-                          ';?>
-                        <?php
+                          ';
+
                           $unfollowedSubjects = getUnfollowedSubjects($conn, $_SESSION['UserID']);
 
                           while($row = mysqli_fetch_assoc($unfollowedSubjects)) {
                             echo '<option value="' . $row['SubjectID'] . '">' . $row['Title'] . ' (' . $row['Shortcode'] . ')</option>';
                           }
                           echo '</select>
-                          <input type="submit" value="Dodaj predmet">
-                        </form>';?>
-              <?php
+                          <input type="submit" value="Dodaj predmet">';
+
+                          if(isset($_GET['redir'])) {
+                            echo '<input type="hidden" name="redir" value="' . $_GET['redir'] . '">';
+                          }
+
+                         echo '</form>';
               } else if ($_GET['action'] === 'unfollow_subject'){
                 if(isset($_GET['data'])) {
                   unfollowSubject($conn, $_SESSION['UserID'], $_GET['data']);
+                  if(!empty($_GET['redir'])) {
+                    header('Location: ' . $rootFolder . 'redovalnica/' . $_GET['redir'] . '.php');
+                  } else header('Location: ' . $rootFolder . 'redovalnica/examinations.php');
                 }
               } else if ($_GET['action'] === 'edit_exams') {
 

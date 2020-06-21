@@ -252,4 +252,12 @@
     $conn->query($sql);
   }
 
+  function getActiveGrades($conn, $subjectID, $userID) {
+    $sql = "SELECT GradeID, Grade, Type, DateReceived FROM Grades g
+            JOIN Subjects s ON s.SubjectID = g.SubjectID
+            WHERE g.SubjectID = '$subjectID' AND g.UserID = '$userID' AND g.Active = '1'
+            ORDER BY Title, DateReceived";
+    return $conn->query($sql);
+  }
+
 ?>

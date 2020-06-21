@@ -26,7 +26,65 @@
               <th scope="col">2. KONFERENCA</th>
               <th scope="col">KONČNA OCENA</th>
             </tr>
-            <tr>
+
+            <?php
+              $activeSubjects = getActiveSubjects($conn, $_SESSION['UserID']);
+              $obdobje1 = new DateTime();
+              $obdobje1->setDate(2020, 1, 15);
+              $obdobje2 = new DateTime();
+              $obdobje2->setDate(2020, 6, 23);
+              while ($row = mysqli_fetch_assoc($activeSubjects)) {
+                if(isFollowingSubject($conn, $_SESSION['UserID'], $row['SubjectID'])) {
+                  echo '<tr>
+                          <td class="predmet"><a href="' . $rootFolder . 'redovalnica/examinations.php?mode=edit&action=unfollow_subject&data=' . $row['SubjectID'] . '&redir=grades"><img src='; ?> <?php echo $rootFolder . "images/remove.png"; ?> <?php echo 'width="20px" align="left"></a>' . $row['Title'] . '</td>
+                          <td><img style="transform:rotate(45deg);" src="' . $rootFolder . 'images/remove.png" width="20px" align="right">';
+
+                          $subjectGrades = getActiveGrades($conn, $row['SubjectID'], $_SESSION['UserID']);
+                          $sum = 0.0;
+                          while ($row1 = mysqli_fetch_assoc($subjectGrades)) {
+                            $dt = new DateTime($row1['DateReceived']);
+                            if($dt <= $obdobje1) {
+                              $sum = $sum + intval($row1['Grade']);
+
+                              if($row1['Type'] === 'ustno') {
+                                 echo '<span class="oral_grade">' . $row1['Grade'] . '</span> ';
+                              } else if($row1['Type'] === 'pisno') {
+                                 echo '<span class="written_grade">' . $row1['Grade'] . '</span> ';
+                              } else if($row1['Type'] === 'izdelek') {
+                                 echo '<span class="product_grade">' . $row1['Grade'] . '</span> ';
+                              }
+                            }
+                          }
+
+                          echo '</td>
+                          <td><img style="transform:rotate(45deg);" src="' . $rootFolder . 'images/remove.png" width="20px" align="right">';
+
+                          $subjectGrades = getActiveGrades($conn, $row['SubjectID'], $_SESSION['UserID']);
+                          while ($row1 = mysqli_fetch_assoc($subjectGrades)) {
+                            $dt = new DateTime($row1['DateReceived']);
+                            if($dt <= $obdobje2 && $dt > $obdobje1) {
+                              $sum = $sum + intval($row1['Grade']);
+
+                              if($row1['Type'] === 'ustno') {
+                                 echo '<span class="oral_grade">' . $row1['Grade'] . '</span> ';
+                              } else if($row1['Type'] === 'pisno') {
+                                 echo '<span class="written_grade">' . $row1['Grade'] . '</span> ';
+                              } else if($row1['Type'] === 'izdelek') {
+                                 echo '<span class="product_grade">' . $row1['Grade'] . '</span> ';
+                              }
+                            }
+                          }
+
+                          if($subjectGrades->num_rows != 0) {
+                            $average = $sum / $subjectGrades->num_rows;
+                            echo '<td class="center">' . number_format($average, 1) . ' (' . round($average) . ')</td>';
+                          } else echo '<td class="center">0.0 (0)</td>';
+
+                        echo '</tr>';
+                }
+              }
+            ?>
+            <!--<tr>
               <td class="predmet"><img src=<?php echo $rootFolder . "images/remove.png"; ?> width="20px" align="left">Slovenščina</td>
               <td><img src=<?php echo $rootFolder . "images/edit.png"; ?> width="20px" align="right">
                 <span class="oral_grade">2</span>,
@@ -78,9 +136,9 @@
                 <span class="written_grade">5</span>
               </td>
               <td class="center">3.67 (4)</td>
-            </tr>
+            </tr>-->
             <tr>
-              <td class="center predmet" colspan="4"><img src=<?php echo $rootFolder . "images/remove.png"; ?> width="20px" valign="middle" style="transform:rotate(45deg);"><a>Dodaj nov predmet</a></td>
+              <td class="center predmet" colspan="4"><img src=<?php echo $rootFolder . "images/remove.png"; ?> width="20px" valign="middle" style="transform:rotate(45deg);"><a href=<?php echo $rootFolder . "redovalnica/examinations.php?mode=edit&action=add_subject&redir=grades"; ?>>Dodaj nov predmet</a></td>
             </tr>
           </table>
         </div>
