@@ -260,4 +260,29 @@
     return $conn->query($sql);
   }
 
+  function addGrade($conn, $subjectID, $userID, $date, $time, $type, $grade) {
+    $dt = new DateTime($date);
+    $dt->setTime(explode(':', $time)[0], explode(':', $time)[0]);
+    $sql = "INSERT INTO Grades (SubjectID, UserID, Grade, Type, DateReceived, Active)
+            VALUES ('$subjectID', '$userID', '$grade', '$type', '" . $dt->format('Y-m-d H:i:s') . "', '1')";
+    $conn->query($sql);
+  }
+
+  function saveGrade($conn, $gradeID, $date, $time, $type, $grade) {
+    $dt = new DateTime($date);
+    $dt->setTime(explode(':', $time)[0], explode(':', $time)[0]);
+    $sql = "UPDATE Grades SET DateReceived = '" . $dt->format('Y-m-d H:i:s') . "', Type = '$type', Grade = '$grade' WHERE GradeID = '$gradeID'";
+    $conn->query($sql);
+  }
+
+  function getGradeInfo($conn, $gradeID) {
+    $sql = "SELECT Type, DateReceived, Grade FROM Grades WHERE GradeID = '$gradeID'";
+    return $conn->query($sql);
+  }
+
+  function removeGrade($conn, $gradeID) {
+    $sql = "UPDATE Grades SET Active = '0' WHERE GradeID = '$gradeID'";
+    $conn->query($sql);
+  }
+
 ?>
